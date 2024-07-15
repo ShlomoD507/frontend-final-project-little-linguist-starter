@@ -2,13 +2,13 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-teme-view',
+  selector: 'app-help',
   standalone: true,
   imports: [
     CommonModule,
   ],
-  templateUrl: './teme-view.component.html',
-  styleUrl: './teme-view.component.css',
+  templateUrl: './help.component.html',
+  styleUrl: './help.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TemeViewComponent { }
+export class HelpComponent { }

@@ -1,0 +1,24 @@
+
+<p>TeamSync Demo</p>
+
+<div class="app-container">
+  <mat-card appearance="outlined" class="team-title-card">
+    <mat-card-content>Team Members</mat-card-content>
+  </mat-card>
+  <div class="team-container">
+    <mat-card *ngFor="let teamMember of teamMembers; let i = index" class="team-card">
+      {{ teamMember }}
+      <mat-card-actions>
+        <img src="assets/delete-icon.png" alt="Delete" class="delete-icon" (click)="deleteMember(i)">
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+<div class="add-buttons">
+  <div *ngFor="let option of teamMembersOptions">
+    <button color="primary" mat-raised-button (click)="addTeamMember(option)">
+      Add {{ option }}
+    </button>
+  </div>
+</div>
+
