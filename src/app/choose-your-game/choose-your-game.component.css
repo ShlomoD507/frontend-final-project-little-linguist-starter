@@ -1,3 +1,29 @@
-:host {
-  display: block;
+.continer{
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+mat-card.game {
+  width: 150px;
+  height: 150px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin: 20px;
+  text-align: center;
+  font-size: 15px;
+gap: 5px;
+}
+
+mat-card.game:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+mat-card-title {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
 }

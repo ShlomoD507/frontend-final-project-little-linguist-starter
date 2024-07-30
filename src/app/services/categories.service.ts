@@ -8,6 +8,7 @@ import { Category } from '../../shared/model/category';
 export class CategoriesService {
   private readonly CATEGORIES_KEY = 'categories';
   private readonly NEXT_ID_KEY = 'nextId';
+  animal: any;
 
   private getCategories() : Map<number, Category>{
     let categoriesString = localStorage.getItem(this.CATEGORIES_KEY);

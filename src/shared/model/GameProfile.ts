@@ -3,6 +3,7 @@ export class GameProfile {
   GameName: string;
   GameDescription: string;
   GameURL: string;
+name: any;
 
   constructor(
     GameId: number,

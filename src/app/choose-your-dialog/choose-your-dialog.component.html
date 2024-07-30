@@ -1,0 +1,18 @@
+<p>choose-your-dialog works!</p>,
+ <div>
+<mat-dialog-content>
+    <h1>Choose Your Category</h1> 
+    <div>
+    <mat-form-field>
+        <mat-select> 
+        <mat-option *ngFor= "let GameProfile of allgames"[value]="GameProfile">
+    {{GameProfile.GameName}}
+    </mat-option>
+    </mat-select>
+    </mat-form-field>
+    <div>
+    <button mat-raised-button color="primary" (click)="openDialog()">
+        choose Category
+    </button>
+    </div>
+    </div>
