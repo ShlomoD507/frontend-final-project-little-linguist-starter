@@ -2,6 +2,9 @@
     <mat-dialog-content>
         <h1>Choose Your Category</h1>
         <div>
+            <h3>
+                {{ selectedGame.GameName }}
+            </h3>
             <mat-form-field>
                 <mat-select [(value)]="selectedCategory">
                     <mat-option *ngFor="let category of allCategories" [value]="category">
@@ -21,7 +24,8 @@
             </div>
 
             <div>
-                <button mat-raised-button color="primary" (click)="openDialog()">
+                <button mat-raised-button color="primary" (click)="openDialog()" mat-dialog-close="true"
+                        [disabled]="selectedCategory == undefined">
                     Play
                 </button>
             </div>

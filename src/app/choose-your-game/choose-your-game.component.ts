@@ -30,10 +30,8 @@ import { ChooseCategoryComponent } from '../choose-category/choose-category.comp
 })
 export class ChooseYourGameComponent implements OnInit {
   public allgames: GameProfile[] = [];
-  public GameId: any;
 
   constructor(
-    private categoriesService: CategoriesService,
     private gameInfoService: GameInfoService,
     private dialogService: MatDialog
   ) {}
@@ -42,7 +40,9 @@ export class ChooseYourGameComponent implements OnInit {
     this.allgames = this.gameInfoService.list();
   }
 
-  openDialog() {
-    this.dialogService.open(ChooseCategoryComponent);
+  openDialog(game: GameProfile) {
+    this.dialogService.open(ChooseCategoryComponent, {
+      data: game
+    });
   }
 }

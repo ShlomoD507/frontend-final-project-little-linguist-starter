@@ -8,7 +8,6 @@ import { ChooseYourGameComponent } from './choose-your-game/choose-your-game.com
 import { SortWordsComponent } from './sort-words/sort-words.component';
 import { TeamSyncComponent } from './TeamSync/TeamSync.component';
 import { TriviaComponent } from './trivia/trivia.component';
-import { ChooseCategoryComponent } from './choose-category/choose-category.component';
 
 export const routes: Routes = [
     {path: "admin", component: CategoriesListComponent},
@@ -21,5 +20,4 @@ export const routes: Routes = [
     {path: "sort-words/:id", component: SortWordsComponent},
     {path: "TeamSync", component: TeamSyncComponent},
     {path: "trivia/:id", component: TriviaComponent},
-    {path: "choose-category", component: ChooseCategoryComponent},
 ];

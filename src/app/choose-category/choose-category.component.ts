@@ -1,9 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogModule,
+} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { GameInfoService } from '../services/GameInfo.service';
 import { GameProfile } from '../../shared/model/GameProfile';
 import { MatButtonModule } from '@angular/material/button';
@@ -32,15 +41,21 @@ export class ChooseCategoryComponent implements OnInit {
   public selectedCategory: Category | undefined;
 
   constructor(
-    private dialogService: MatDialog,
-    private categoryService: CategoriesService
-  ) {
-
-  }
+    private categoryService: CategoriesService,
+    @Inject(MAT_DIALOG_DATA) public selectedGame: GameProfile,
+    private router: Router
+  ) {}
   ngOnInit(): void {
     this.allCategories = this.categoryService.list();
   }
   openDialog() {
-    this.dialogService.open(ChooseYourGameComponent);
+    if (this.selectedCategory == undefined) {
+      alert('choose category!');
+    } else {
+      let gameUrl = this.selectedGame.GameURL;
+      let categoryId = this.selectedCategory?.id;
+
+      this.router.navigate([gameUrl, categoryId]);
+    }
   }
 }
