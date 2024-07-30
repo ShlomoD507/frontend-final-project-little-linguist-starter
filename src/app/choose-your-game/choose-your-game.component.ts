@@ -12,7 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ChooseYourDialogComponent } from '../choose-your-dialog/choose-your-dialog.component';
+import { ChooseCategoryComponent } from '../choose-category/choose-category.component';
 
 @Component({
   selector: 'app-choose-your-game',
@@ -29,18 +29,20 @@ import { ChooseYourDialogComponent } from '../choose-your-dialog/choose-your-dia
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChooseYourGameComponent implements OnInit {
-  allgames: GameProfile[] = [];
-  GameId: any;
+  public allgames: GameProfile[] = [];
+  public GameId: any;
 
   constructor(
     private categoriesService: CategoriesService,
     private gameInfoService: GameInfoService,
     private dialogService: MatDialog
   ) {}
+
   ngOnInit(): void {
     this.allgames = this.gameInfoService.list();
   }
+
   openDialog() {
-    this.dialogService.open(ChooseYourDialogComponent);
+    this.dialogService.open(ChooseCategoryComponent);
   }
 }
