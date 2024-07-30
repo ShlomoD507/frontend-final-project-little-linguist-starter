@@ -1,20 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import { CategoriesService } from './../services/categories.service';
 import { Category } from './../../shared/model/category';
+import { RouterModule } from '@angular/router';
+
 @Component({
-  selector: 'app-sort-words',
+  selector: 'app-trivia',
   standalone: true,
   imports: [
     CommonModule,RouterModule,
   ],
-  templateUrl: './sort-words.component.html',
-  styleUrl: './sort-words.component.css',
+  templateUrl: './trivia.component.html',
+  styleUrl: './trivia.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
- export class SortWordsComponent implements OnInit{ 
+ export class TriviaComponent implements OnInit{ 
   @Input()
   id=''
 
@@ -25,6 +26,8 @@ import { Category } from './../../shared/model/category';
       this.currentCategory = this.CategoriesService.get(parseInt(this.id));
   }
 }
+
+
 
 
 

@@ -33,3 +33,4 @@ export class TeamSyncComponent {
     this.teamMembers.push(member);
   }
 }
+export class CardOverviewExample {}

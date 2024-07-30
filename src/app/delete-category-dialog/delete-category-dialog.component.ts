@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent } from '@angular/material/dialog';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-delete-category-dialog',
@@ -9,7 +10,8 @@ import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent } f
     MatButtonModule,
     MatDialogContent,
     MatDialogActions,
-    MatDialogClose
+    MatDialogClose,
+    RouterModule,
   ],
   templateUrl: './delete-category-dialog.component.html',
   styleUrl: './delete-category-dialog.component.css',

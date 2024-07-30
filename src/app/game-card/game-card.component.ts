@@ -3,14 +3,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-game-card',
   standalone: true,
   imports: [
     CommonModule,RouterModule,
-  
   ],
-  templateUrl: './Dashboard.component.html',
-  styleUrl: './Dashboard.component.css',
+  templateUrl: './game-card.component.html',
+  styleUrl: './game-card.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardComponent { }
+export class GameCardComponent { }

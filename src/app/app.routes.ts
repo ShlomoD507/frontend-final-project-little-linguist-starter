@@ -7,15 +7,17 @@ import { MixdWordsComponent } from './mixd-words/mixd-words.component';
 import { ChooseYourGameComponent } from './choose-your-game/choose-your-game.component';
 import { SortWordsComponent } from './sort-words/sort-words.component';
 import { TeamSyncComponent } from './TeamSync/TeamSync.component';
+import { TriviaComponent } from './trivia/trivia.component';
 
 export const routes: Routes = [
-    {path: "", component: CategoriesListComponent},
+    {path: "admin", component: CategoriesListComponent},
     {path: "category/:id", component: CategoryFormComponent},
     {path: "newcategory", component: CategoryFormComponent},
-    {path: "Dashboard", component: DashboardComponent},
+    {path: "", component: DashboardComponent},
     {path: "help", component: HelpComponent},
-    {path: "mixd-words", component: MixdWordsComponent},
+    {path: "mixd-words/:id", component: MixdWordsComponent},
     {path: "choose-your-game", component: ChooseYourGameComponent},
-    {path: "sort-words", component: SortWordsComponent},
+    {path: "sort-words/:id", component: SortWordsComponent},
     {path: "TeamSync", component: TeamSyncComponent},
+    {path: "trivia/:id", component: TriviaComponent},
 ];

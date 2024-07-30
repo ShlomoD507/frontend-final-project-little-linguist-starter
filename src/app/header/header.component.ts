@@ -6,7 +6,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 
-
 @Component({
   selector: 'app-header',
   standalone: true,

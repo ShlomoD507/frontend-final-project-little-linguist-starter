@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { TranslatedWord } from '../../shared/model/translated-word';
 
 @Component({
@@ -22,7 +22,8 @@ import { TranslatedWord } from '../../shared/model/translated-word';
     MatInputModule, 
     MatButtonModule, 
     MatIconModule,
-    MatTableModule
+    MatTableModule,
+    RouterModule,
   ],
   templateUrl: './category-form.component.html',
   styleUrl: './category-form.component.css',
