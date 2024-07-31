@@ -7,16 +7,13 @@ import {
 } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
-  MatDialog,
   MatDialogModule,
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { Router, RouterModule } from '@angular/router';
-import { GameInfoService } from '../services/GameInfo.service';
 import { GameProfile } from '../../shared/model/GameProfile';
 import { MatButtonModule } from '@angular/material/button';
-import { ChooseYourGameComponent } from '../choose-your-game/choose-your-game.component';
 import { CategoriesService } from '../services/categories.service';
 import { Category } from '../../shared/model/category';
 
