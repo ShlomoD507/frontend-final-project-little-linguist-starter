@@ -2,17 +2,15 @@ h2{
     font-size: 34px;
     text-align: center;
     font-weight: bold;
-  
+    color: rgb(60, 60, 135);
+  font-weight: bold;
   }
   
-
 p{
     font-size: 25px;
     text-align: center;
     font-weight: bold;
-  
   }
-  
   .id{
     font-size: 10px;
     text-align: center;

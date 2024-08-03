@@ -4,3 +4,10 @@
 .new-word-element {
   padding-right: 8px;
 }
+
+button{
+left: 10px ;
+}
+button[type="submit"] {
+  margin-bottom: 60px; 
+}

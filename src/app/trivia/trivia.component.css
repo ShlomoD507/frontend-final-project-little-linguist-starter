@@ -1,15 +1,14 @@
-p{
+h1{
   font-size: 34px;
   text-align: center;
   font-weight: bold;
-
+  color: rgb(60, 60, 135);
+  font-weight: bold;
 }
-
 .id{
   font-size: 10px;
   text-align: center;
 }
-
 .name {
   font-weight: bold;
   text-align: center;

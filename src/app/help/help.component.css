@@ -1,5 +1,7 @@
-.continer{ 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+h1{ 
+  font-size: 34px;
+  text-align: center;
+  font-weight: bold;
+  color: rgb(60, 60, 135);
+font-weight: bold;
 }

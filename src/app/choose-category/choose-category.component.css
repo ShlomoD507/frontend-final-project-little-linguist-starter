@@ -17,8 +17,21 @@ h3{
   align-items: center;
   justify-content: center;
 }
+.Update{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+
+}
 .button-container{
   display: flex;
   justify-content: center;
   width: 100%;
+}
+
+mat-form-field{
+  display: flex;
+ align-items: center;
+ justify-content: center;
 }
