@@ -9,7 +9,7 @@ export class GameInfoService {
     new GameProfile(
       1,
       'Sort word',
-      'Generate the game description',
+      'Sort words in the correct order, such as alphabetically or by specific categories',
       'sort-words'
     ),
     new GameProfile(

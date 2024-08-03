@@ -1,3 +1,17 @@
-:host {
-  display: block;
+p{
+  font-size: 34px;
+  text-align: center;
+  font-weight: bold;
+
+}
+
+.id{
+  font-size: 10px;
+  text-align: center;
+}
+
+.name {
+  font-weight: bold;
+  text-align: center;
+  font-size: 15px;
 }
