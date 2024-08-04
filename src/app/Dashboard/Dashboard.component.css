@@ -1,3 +1,7 @@
-:host {
-  display: block;
+p{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(60, 60, 135);
+  font-weight: bold;
 }

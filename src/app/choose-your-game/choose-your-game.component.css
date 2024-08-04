@@ -13,7 +13,7 @@ h1{
 mat-card.game {
   width: 250px;
   height: 150px;
-  border: 1px solid #00ff11;
+  border: 2px solid #00ff44;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.9s;
@@ -21,6 +21,8 @@ mat-card.game {
   text-align: center;
   font-size: 18px;
 gap: 5px;
+background: linear-gradient(to top left, rgb(0, 255, 255), yellow);
+
 }
 
 mat-card.game:hover {
