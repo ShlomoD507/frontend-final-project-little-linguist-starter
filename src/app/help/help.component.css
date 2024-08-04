@@ -5,3 +5,71 @@ h1{
   color:navy;
 font-weight: bold;
 }
+
+.paragraph1{
+margin: 10px;
+text-align:justify;
+}
+
+.paragraph2{
+margin: 10px;
+text-align:justify;
+  }
+  
+.paragraph3{
+margin: 10px;
+text-align:justify;
+padding-bottom: 30px;
+}
+
+
+.help-page {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 2px solid #59eb1b;
+}
+
+.help-page h1 {
+  text-align: center;
+  color: #333;
+}
+
+.help-page section {
+  margin-bottom: 20px;
+}
+
+.help-page h2 {
+  color: #0056b3;
+  border-bottom: 2px solid #0056b3;
+  padding-bottom: 5px;
+}
+
+.help-page ol {
+  margin-left: 20px;
+}
+
+.help-page ol li {
+  margin-bottom: 10px;
+}
+
+.help-page dt {
+  font-weight: bold;
+  color: #333;
+}
+
+.help-page dd {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.help-page a {
+  color: #0056b3;
+  text-decoration: none;
+}
+
+.help-page a:hover {
+  text-decoration: underline;
+}
