@@ -36,7 +36,6 @@ export class ChooseCategoryComponent implements OnInit {
   public GameId: any;
   public allCategories: Category[] = [];
   public selectedCategory: Category | undefined;
-
   constructor(
     private categoryService: CategoriesService,
     @Inject(MAT_DIALOG_DATA) public selectedGame: GameProfile,
@@ -51,7 +50,6 @@ export class ChooseCategoryComponent implements OnInit {
     } else {
       let gameUrl = this.selectedGame.GameURL;
       let categoryId = this.selectedCategory?.id;
-
       this.router.navigate([gameUrl, categoryId]);
     }
   }
