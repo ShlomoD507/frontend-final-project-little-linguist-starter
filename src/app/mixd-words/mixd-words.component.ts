@@ -3,12 +3,13 @@ import { Category } from './../../shared/model/category';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ExitButtonComponent } from '../exit-button/exit-button.component';
 
 @Component({
   selector: 'app-mixd-words',
   standalone: true,
   imports: [
-    CommonModule,RouterModule,
+    CommonModule,RouterModule,ExitButtonComponent
   ],
   templateUrl: './mixd-words.component.html',
   styleUrl: './mixd-words.component.css',
