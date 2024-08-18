@@ -8,6 +8,4 @@ import { Component } from '@angular/core';
   styleUrl: './exit-dialog.component.css'
 })
 export class ExitDialogComponent {
-
-
 }
