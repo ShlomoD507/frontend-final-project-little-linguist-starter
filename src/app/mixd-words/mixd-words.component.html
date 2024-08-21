@@ -1,7 +1,17 @@
-<h2>Mixed-Words</h2>
+<h2>Mixed Words - {{currentCategory?.name}}</h2>
 <div class="container" >
 <div class="id" >Category id {{id}}</div>
-<div class="name" >Category name {{currentCategory?.name}}</div>
+<!-- <div class="name" >Category name {{currentCategory?.name}}</div> -->
 <app-exit-button></app-exit-button>
 
+<div></div>
+
+<form class="Guessform">
+    <mat-form-field class="GuessInput" color="primary" >
+      <mat-label   >Guess the Word :</mat-label>
+      <input matInput >
+    </mat-form-field>
+  </form>
+  <button mat-stroked-button color="primary" >Reset</button>
+  <button mat-stroked-button color="primary" >Submit</button>
 </div>
