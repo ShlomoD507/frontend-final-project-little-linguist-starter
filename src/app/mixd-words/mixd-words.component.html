@@ -1,17 +1,31 @@
-<h2>Mixed Words - {{currentCategory?.name}}</h2>
-<div class="container" >
-<div class="id" >Category id {{id}}</div>
-<!-- <div class="name" >Category name {{currentCategory?.name}}</div> -->
-<app-exit-button></app-exit-button>
-
-<div></div>
-
-<form class="Guessform">
-    <mat-form-field class="GuessInput" color="primary" >
-      <mat-label   >Guess the Word :</mat-label>
-      <input matInput >
-    </mat-form-field>
-  </form>
-  <button mat-stroked-button color="primary" >Reset</button>
-  <button mat-stroked-button color="primary" >Submit</button>
+<div *ngIf="isLoading">Loading...</div>
+<h2>Mixed Words - {{ currentCategory?.name }}</h2>
+<div class="container">
+  <div class="id">Category ID: {{ id }}</div>
+    <div *ngIf="!endGame && words && !isLoading">
+      <span>{{ words[index].target }}</span>
+      <span>{{ mixWord }}</span>
+    <app-exit-button class="exitgame" (click)="exitGame()">exit_to_app</app-exit-button>
+    <form #mixWordForm="ngForm" (ngSubmit)="submit()">
+      <div class="timer-container">
+        <mat-icon>alarm</mat-icon>
+        <app-timer [duration]="gameDuration">
+        </app-timer>
+      </div>
+      <br>
+      <mat-form-field class="GuessInput" color="primary">
+        <mat-label>Guess the Word :</mat-label>
+        <input matInput [(ngModel)]="guess" name="guess" #guessField="ngModel" required />
+        <!--<input matInput [(ngModel)]="words[index]?.guess" name="guess" #guessField="ngModel" required />-->
+      </mat-form-field>
+      <button type="button" mat-stroked-button color="primary" (click)="reset()">Reset</button>
+      <button type="submit" mat-stroked-button color="primary" [disabled]="mixWordForm.invalid || mixWordForm.pending">Submit</button>
+    </form>
+  </div>
+</div>
+<div class="progress-container">
+  <div class="progress-bar">
+    <mat-progress-bar mode="determinate" [value]="calculateProgress()"></mat-progress-bar>
+    <div class="progress-text">{{ calculateProgress() | number : '1.0-0' }}%</div>
+  </div>
 </div>

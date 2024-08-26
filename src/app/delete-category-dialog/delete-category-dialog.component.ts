@@ -1,6 +1,11 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+} from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -18,5 +23,5 @@ import { RouterModule } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteCategoryDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public categoryName : string){}
- }
+  constructor(@Inject(MAT_DIALOG_DATA) public categoryName: string) {}
+}

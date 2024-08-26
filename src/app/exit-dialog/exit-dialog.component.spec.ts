@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ExitDialogComponent } from './exit-dialog.component';
 
 describe('ExitDialogComponent', () => {

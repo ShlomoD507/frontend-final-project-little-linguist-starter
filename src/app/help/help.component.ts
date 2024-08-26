@@ -13,5 +13,4 @@ import { RouterModule } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HelpComponent {
-id: any;
 }

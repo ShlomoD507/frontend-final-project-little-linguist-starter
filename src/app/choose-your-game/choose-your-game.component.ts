@@ -1,10 +1,5 @@
-import { CategoriesService } from './../services/categories.service';
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { GameProfile } from '../../shared/model/GameProfile';
 import { GameInfoService } from '../services/GameInfo.service';
@@ -42,7 +37,7 @@ export class ChooseYourGameComponent implements OnInit {
 
   openDialog(game: GameProfile) {
     this.dialogService.open(ChooseCategoryComponent, {
-      data: game
+      data: game,
     });
   }
 }

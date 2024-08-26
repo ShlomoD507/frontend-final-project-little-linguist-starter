@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { WinLoseComponent } from './win-lose.component';
 
 describe('WinLoseComponent', () => {

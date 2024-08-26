@@ -14,7 +14,7 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <div *ngIf="selectedCategory != undefined">
+            <div *ngIf="selectedCategory !== undefined">
                 <div class="words">
                     {{ selectedCategory.words.length }} words
                 </div>
@@ -24,7 +24,7 @@
             </div>
             <div class="button-container">
                 <button mat-raised-button color="primary" (click)="openDialog()" mat-dialog-close="true"
-                        [disabled]="selectedCategory == undefined">
+                        [disabled]="selectedCategory === undefined">
                    Let's Play
                 </button>
             </div>

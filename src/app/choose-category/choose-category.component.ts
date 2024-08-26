@@ -5,10 +5,7 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogModule,
-} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { Router, RouterModule } from '@angular/router';
@@ -33,7 +30,7 @@ import { Category } from '../../shared/model/category';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChooseCategoryComponent implements OnInit {
-  public GameId: any;
+  public GameId?: Category;
   public allCategories: Category[] = [];
   public selectedCategory: Category | undefined;
   constructor(
@@ -48,8 +45,8 @@ export class ChooseCategoryComponent implements OnInit {
     if (this.selectedCategory == undefined) {
       alert('choose category!');
     } else {
-      let gameUrl = this.selectedGame.GameURL;
-      let categoryId = this.selectedCategory?.id;
+      const gameUrl = this.selectedGame.GameURL;
+      const categoryId = this.selectedCategory?.id;
       this.router.navigate([gameUrl, categoryId]);
     }
   }
