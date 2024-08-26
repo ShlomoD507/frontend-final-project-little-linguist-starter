@@ -36,7 +36,7 @@ import { ExitButtonComponent } from '../exit-button/exit-button.component';
     NgIf,
   ],
   templateUrl: './mixd-words.component.html', 
-  styleUrl: './mixd-words.component.css', 
+  styleUrls: ['./mixd-words.component.css'], 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
@@ -52,40 +52,35 @@ export class MixdWordsComponent implements OnInit {
   gamePoints: number = 0;
   gameDuration: number = 0;
   displayTimeLeft: string = '';
-
   currentCategory: Category | undefined; 
   
   @ViewChild(TimerComponent) timerComponent!: TimerComponent;
-guess?:string ;
+  guess?: string;
 
   constructor(
-    private CategoriesService: CategoriesService,
+    private categoriesService: CategoriesService,
     private dialogService: MatDialog,
     private gamePlayedService: GamePlayedService 
   ) {}
 
   ngOnInit(): void {
-    const category = this.CategoriesService.get(parseInt(this.id));
+    const category = this.categoriesService.get(parseInt(this.id));
     if (category) {
         this.currentCategory = category;
         this.words = this.currentCategory.words || [];
-        console.log("Loaded words: ", this.words);  
         this.startNewGame();
     } else {
         console.error("Category not found.");
     }
-}
-
+  }
   nextWord(): void {
     if (this.words && this.index < this.words.length - 1) {
         this.index++;
         this.mixWord = [...this.words[this.index].origin]
           .sort(() => Math.random() - 0.5)
           .join('');
-        console.log("Current word: ", this.words[this.index]);  
     }
-}
-
+  }
   reset(): void {
     if (this.words) this.words[this.index].guess = '';
   }
@@ -132,7 +127,7 @@ guess?:string ;
     this.tryCount = 0;
     this.gamePoints = 16;
 
-    const category = this.CategoriesService.get(parseInt(this.id));
+    const category = this.categoriesService.get(parseInt(this.id));
     if (category) {
       this.currentCategory = category;
       this.words = this.currentCategory.words || [];
@@ -151,7 +146,6 @@ guess?:string ;
     const totalWords = this.words?.length || 0;
     const guessedWordsRatio = this.numSuccess / totalWords;
     const categoryProgressRatio = this.index / totalWords;
-    const progress = Math.max(guessedWordsRatio, categoryProgressRatio) * 100;
-    return progress;
+    return Math.max(guessedWordsRatio, categoryProgressRatio) * 100;
   }
 }

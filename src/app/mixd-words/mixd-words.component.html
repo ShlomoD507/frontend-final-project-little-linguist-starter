@@ -1,31 +1,40 @@
 <div *ngIf="isLoading">Loading...</div>
 <h2>Mixed Words - {{ currentCategory?.name }}</h2>
 <div class="container">
-  <div class="id">Category ID: {{ id }}</div>
-    <div *ngIf="!endGame && words && !isLoading">
-      <span>{{ words[index].target }}</span>
-      <span>{{ mixWord }}</span>
+  <div *ngIf="!endGame && words && !isLoading">
+
+    <div class="word-display">
+      <span class="original-word">{{ words[index]?.target }}</span>
+      <span class="mixed-word">{{ mixWord }}</span>
+    </div>
     <app-exit-button class="exitgame" (click)="exitGame()">exit_to_app</app-exit-button>
+
+    <div class="timer-container">
+      <mat-icon>alarm</mat-icon>
+      <app-timer [duration]="gameDuration"></app-timer>
+    </div>
+
     <form #mixWordForm="ngForm" (ngSubmit)="submit()">
-      <div class="timer-container">
-        <mat-icon>alarm</mat-icon>
-        <app-timer [duration]="gameDuration">
-        </app-timer>
-      </div>
-      <br>
       <mat-form-field class="GuessInput" color="primary">
-        <mat-label>Guess the Word :</mat-label>
+        <mat-label>Guess the Word:</mat-label>
         <input matInput [(ngModel)]="guess" name="guess" #guessField="ngModel" required />
-        <!--<input matInput [(ngModel)]="words[index]?.guess" name="guess" #guessField="ngModel" required />-->
       </mat-form-field>
-      <button type="button" mat-stroked-button color="primary" (click)="reset()">Reset</button>
-      <button type="submit" mat-stroked-button color="primary" [disabled]="mixWordForm.invalid || mixWordForm.pending">Submit</button>
+
+      <div class="button-group">
+        <button type="button" mat-stroked-button color="primary" (click)="reset()">Reset</button>
+        <button type="submit" mat-stroked-button color="primary" [disabled]="mixWordForm.invalid || mixWordForm.pending">Submit</button>
+      </div>
     </form>
   </div>
 </div>
+
 <div class="progress-container">
   <div class="progress-bar">
+    <span class="current-word-count">{{ index + 1 }}</span> <!-- מספר המילה הנוכחית -->
     <mat-progress-bar mode="determinate" [value]="calculateProgress()"></mat-progress-bar>
+    <span class="total-word-count">{{ words.length }}</span> <!-- סך הכל מילים -->
     <div class="progress-text">{{ calculateProgress() | number : '1.0-0' }}%</div>
-  </div>
+    </div>
 </div>
+
+        <!--<input matInput [(ngModel)]="words[index]?.guess" name="guess" #guessField="ngModel" required />-->
