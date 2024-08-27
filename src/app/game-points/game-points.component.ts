@@ -5,8 +5,8 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './game-points.component.html',
-  styleUrl: './game-points.component.css'
+  styleUrl: './game-points.component.css',
 })
 export class GamePointsComponent {
-
+  points: number = 0;
 }

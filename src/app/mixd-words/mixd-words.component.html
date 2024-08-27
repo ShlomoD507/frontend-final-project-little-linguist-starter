@@ -3,6 +3,7 @@
 <div class="container">
   <div *ngIf="!endGame && words && !isLoading">
     <app-exit-button class="exitgame" (click)="exitGame()">exit_to_app</app-exit-button>
+    <app-game-points></app-game-points>
 
     <div class="word-display">
       <span class="original-word">{{ words[index].target }}</span>

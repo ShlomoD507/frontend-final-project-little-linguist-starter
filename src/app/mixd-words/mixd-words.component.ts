@@ -24,6 +24,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RouterModule } from '@angular/router';
 import { ExitButtonComponent } from '../exit-button/exit-button.component';
 import { Language } from '../../shared/model/language';
+import { GamePointsComponent } from "../game-points/game-points.component";
 
 @Component({
   selector: 'app-mixd-words',
@@ -41,7 +42,8 @@ import { Language } from '../../shared/model/language';
     TimerComponent,
     NgFor,
     NgIf,
-  ],
+    GamePointsComponent
+],
   templateUrl: './mixd-words.component.html',
   styleUrls: ['./mixd-words.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
