@@ -24,7 +24,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RouterModule } from '@angular/router';
 import { ExitButtonComponent } from '../exit-button/exit-button.component';
 import { Language } from '../../shared/model/language';
-import { GamePointsComponent } from "../game-points/game-points.component";
+import { GamePointsComponent } from '../game-points/game-points.component';
 
 @Component({
   selector: 'app-mixd-words',
@@ -42,18 +42,17 @@ import { GamePointsComponent } from "../game-points/game-points.component";
     TimerComponent,
     NgFor,
     NgIf,
-    GamePointsComponent
-],
+    GamePointsComponent,
+  ],
   templateUrl: './mixd-words.component.html',
   styleUrls: ['./mixd-words.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MixdWordsComponent implements OnInit {
-  isLoading = true;
   @Input() id: string = '';
   words: TranslatedWord[] = [];
   index: number = 0;
-  mixWord: string = '';
+  mixedWord: string = '';
   numSuccess: number = 0;
   endGame: boolean = false;
   tryCount: number = 0;
@@ -88,16 +87,20 @@ export class MixdWordsComponent implements OnInit {
     }
   }
 
-  nextWord(): void {
+  mixWord(): void {
     if (this.words && this.index < this.words.length - 1) {
-      this.index++;
-      this.mixWord = [...this.words[this.index].origin]
+      console.log('mixing word');
+      this.mixedWord = [...this.words[this.index].origin]
         .sort(() => Math.random() - 0.5)
-        .join('');
+        .join(' ')
+        .toUpperCase();
     }
   }
+
   reset(): void {
-    if (this.words) this.words[this.index].guess = '';
+    if (this.words) {
+      this.words[this.index].guess = '';
+    }
   }
 
   submit(): void {
@@ -129,28 +132,18 @@ export class MixdWordsComponent implements OnInit {
         disableClose: true,
       });
     } else {
-      this.nextWord();
+      this.mixWord();
       this.reset();
     }
   }
 
   startNewGame(): void {
-    this.isLoading = true;
     this.index = 0;
     this.numSuccess = 0;
     this.endGame = false;
     this.tryCount = 0;
     this.gamePoints = 16;
-
-    const category = this.categoriesService.get(parseInt(this.id));
-    if (category) {
-      this.currentCategory = category;
-      this.words = this.currentCategory.words || [];
-      this.isLoading = false;
-    } else {
-      console.error('Error loading category.');
-      this.isLoading = false;
-    }
+    this.mixWord();
   }
 
   exitGame(): void {
