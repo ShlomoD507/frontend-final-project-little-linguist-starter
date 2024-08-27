@@ -1,20 +1,24 @@
-<h2>Mixed Words - {{ currentCategory.name }}</h2>
 <div class="container">
-  <div *ngIf="!endGame">
+  <div class="headTitle">
     <app-exit-button class="exitgame" (click)="exitGame()">exit_to_app</app-exit-button>
+    <h2>Mixed Words - {{ currentCategory.name }}</h2>
     <app-game-points [points]="gamePoints"></app-game-points>
+  </div>
+
+  <div *ngIf="!endGame">
+
 
     <div class="word-display">
       <span class="original-word">{{ words[index].target }}</span>
       <span class="mixed-word">{{ mixedWord }}</span>
     </div>
 
-    <div class="timer-container">
+    <!-- <div class="timer-container">
       <mat-icon>alarm</mat-icon>
       <app-timer [duration]="gameDuration"></app-timer>
-    </div>
+    </div> -->
 
-    <form #mixWordForm="ngForm" (ngSubmit)="submit()">
+    <form class="mainForm" #mixWordForm="ngForm" (ngSubmit)="submit()">
       <mat-form-field class="GuessInput" color="primary">
         <mat-label>Guess the Word:</mat-label>
         <input matInput [(ngModel)]="words[index].guess" name="guess" #guessField="ngModel" required />

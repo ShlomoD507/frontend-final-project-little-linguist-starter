@@ -3,7 +3,11 @@ h2 {
   text-align: center;
   font-weight: bold;
   color: rgb(60, 60, 135);
-  background: linear-gradient(to top left, rgb(159, 236, 236), rgb(230, 230, 147));
+  background: linear-gradient(
+    to top left,
+    rgb(159, 236, 236),
+    rgb(230, 230, 147)
+  );
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 20px;
@@ -25,10 +29,18 @@ h2 {
   align-items: center;
   margin-bottom: 20px;
   flex-direction: column;
+  font-size: x-large;
+}
+.GuessInput{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 form {
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
   width: 100%;
@@ -52,8 +64,6 @@ button {
   display: flex;
   justify-content: space-between; /* מפזר את המספרים בקצוות */
   align-items: center; /* ממרכז את האחוזים לאורך הציר האנכי */
-  
-
 }
 
 .progress-bar {
@@ -64,7 +74,6 @@ button {
   align-items: center;
   flex-grow: 1;
   margin: 0 10px;
-
 }
 
 .progress-text {
@@ -73,7 +82,6 @@ button {
   text-align: center;
   width: 50px; /* הגדרה של רוחב האזור של האחוזים */
 }
-
 
 mat-icon {
   font-size: 25px;
@@ -95,5 +103,11 @@ mat-icon {
   margin: 0 10px;
 }
 
-
-
+.headTitle {
+  display: flex;
+  width: 100%;
+}
+h2 {
+  flex: 1;
+  flex-grow: 1;
+}
