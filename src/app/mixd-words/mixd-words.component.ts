@@ -25,6 +25,7 @@ import { RouterModule } from '@angular/router';
 import { ExitButtonComponent } from '../exit-button/exit-button.component';
 import { Language } from '../../shared/model/language';
 import { GamePointsComponent } from '../game-points/game-points.component';
+import { MatTableModule } from '@angular/material/table';
 
 @Component({
   selector: 'app-mixd-words',
@@ -43,6 +44,7 @@ import { GamePointsComponent } from '../game-points/game-points.component';
     NgFor,
     NgIf,
     GamePointsComponent,
+    MatTableModule,
   ],
   templateUrl: './mixd-words.component.html',
   styleUrls: ['./mixd-words.component.css'],
@@ -60,6 +62,8 @@ export class MixdWordsComponent implements OnInit {
   gamePoints: number = 0;
   gameDuration: number = 0;
   displayTimeLeft: string = '';
+  displayedColumns: string[] = ['hebrew', 'english', 'isCorrect'];
+
   currentCategory: Category = new Category(
     1,
     'fake-category',
