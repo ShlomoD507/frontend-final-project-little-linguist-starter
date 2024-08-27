@@ -4,7 +4,7 @@
   <div *ngIf="!endGame && words && !isLoading">
 
     <div class="word-display">
-      <span class="original-word">{{ words[index]?.target }}</span>
+      <span class="original-word">{{ words[index].target }}</span>
       <span class="mixed-word">{{ mixWord }}</span>
     </div>
     <app-exit-button class="exitgame" (click)="exitGame()">exit_to_app</app-exit-button>
@@ -30,9 +30,9 @@
 
 <div class="progress-container">
   <div class="progress-bar">
-    <span class="current-word-count">{{ index + 1 }}</span> <!-- מספר המילה הנוכחית -->
+    <span class="current-word-count">{{ index + 1 }}</span> 
     <mat-progress-bar mode="determinate" [value]="calculateProgress()"></mat-progress-bar>
-    <span class="total-word-count">{{ words.length }}</span> <!-- סך הכל מילים -->
+    <span class="total-word-count">{{ words.length }}</span> 
     <div class="progress-text">{{ calculateProgress() | number : '1.0-0' }}%</div>
     </div>
 </div>
