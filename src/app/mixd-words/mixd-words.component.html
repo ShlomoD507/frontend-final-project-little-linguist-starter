@@ -1,13 +1,13 @@
 <div *ngIf="isLoading">Loading...</div>
-<h2>Mixed Words - {{ currentCategory?.name }}</h2>
+<h2>Mixed Words - {{ currentCategory.name }}</h2>
 <div class="container">
   <div *ngIf="!endGame && words && !isLoading">
+    <app-exit-button class="exitgame" (click)="exitGame()">exit_to_app</app-exit-button>
 
     <div class="word-display">
       <span class="original-word">{{ words[index].target }}</span>
       <span class="mixed-word">{{ mixWord }}</span>
     </div>
-    <app-exit-button class="exitgame" (click)="exitGame()">exit_to_app</app-exit-button>
 
     <div class="timer-container">
       <mat-icon>alarm</mat-icon>
@@ -22,7 +22,8 @@
 
       <div class="button-group">
         <button type="button" mat-stroked-button color="primary" (click)="reset()">Reset</button>
-        <button type="submit" mat-stroked-button color="primary" [disabled]="mixWordForm.invalid || mixWordForm.pending">Submit</button>
+        <button type="submit" mat-stroked-button color="primary"
+          [disabled]="mixWordForm.invalid || mixWordForm.pending">Submit</button>
       </div>
     </form>
   </div>
@@ -30,11 +31,11 @@
 
 <div class="progress-container">
   <div class="progress-bar">
-    <span class="current-word-count">{{ index + 1 }}</span> 
+    <span class="current-word-count">{{ index + 1 }}</span>
     <mat-progress-bar mode="determinate" [value]="calculateProgress()"></mat-progress-bar>
-    <span class="total-word-count">{{ words.length }}</span> 
+    <span class="total-word-count">{{ words.length }}</span>
     <div class="progress-text">{{ calculateProgress() | number : '1.0-0' }}%</div>
-    </div>
+  </div>
 </div>
 
-        <!--<input matInput [(ngModel)]="words[index]?.guess" name="guess" #guessField="ngModel" required />-->
+<!--<input matInput [(ngModel)]="words[index]?.guess" name="guess" #guessField="ngModel" required />-->

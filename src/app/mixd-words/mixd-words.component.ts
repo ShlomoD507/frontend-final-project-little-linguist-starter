@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, Input, ChangeDetectionStrategy } from '@angular/core'; 
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Input,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CategoriesService } from './../services/categories.service';
 import { Category } from './../../shared/model/category';
@@ -6,7 +12,7 @@ import { TranslatedWord } from '../../shared/model/translated-word';
 import { TimerComponent } from '../timer/timer.component';
 import { WinLoseComponent } from '../win-lose/win-lose.component';
 import { ExitDialogComponent } from '../exit-dialog/exit-dialog.component';
-import { GamePlayedService } from './../services/game-played.service'; 
+import { GamePlayedService } from './../services/game-played.service';
 import { GamePlayed } from '../../shared/model/game-played.model';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RouterModule } from '@angular/router';
 import { ExitButtonComponent } from '../exit-button/exit-button.component';
+import { Language } from '../../shared/model/language';
 
 @Component({
   selector: 'app-mixd-words',
@@ -25,9 +32,9 @@ import { ExitButtonComponent } from '../exit-button/exit-button.component';
     CommonModule,
     RouterModule,
     MatIconModule,
-    ExitButtonComponent, 
+    ExitButtonComponent,
     FormsModule,
-    MatFormFieldModule, 
+    MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatProgressBarModule,
@@ -35,16 +42,15 @@ import { ExitButtonComponent } from '../exit-button/exit-button.component';
     NgFor,
     NgIf,
   ],
-  templateUrl: './mixd-words.component.html', 
-  styleUrls: ['./mixd-words.component.css'], 
+  templateUrl: './mixd-words.component.html',
+  styleUrls: ['./mixd-words.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 export class MixdWordsComponent implements OnInit {
   isLoading = true;
   @Input() id: string = '';
   words: TranslatedWord[] = [];
-  index: number = -1;
+  index: number = 0;
   mixWord: string = '';
   numSuccess: number = 0;
   endGame: boolean = false;
@@ -52,33 +58,40 @@ export class MixdWordsComponent implements OnInit {
   gamePoints: number = 0;
   gameDuration: number = 0;
   displayTimeLeft: string = '';
-  currentCategory: Category | undefined; 
-  
+  currentCategory: Category = new Category(
+    1,
+    'fake-category',
+    Language.English,
+    Language.English,
+    []
+  );
+
   @ViewChild(TimerComponent) timerComponent!: TimerComponent;
   guess?: string;
 
   constructor(
     private categoriesService: CategoriesService,
     private dialogService: MatDialog,
-    private gamePlayedService: GamePlayedService 
+    private gamePlayedService: GamePlayedService
   ) {}
 
   ngOnInit(): void {
     const category = this.categoriesService.get(parseInt(this.id));
     if (category) {
-        this.currentCategory = category;
-        this.words = this.currentCategory.words || [];
-        this.startNewGame();
+      this.currentCategory = category;
+      this.words = this.currentCategory.words;
+      this.startNewGame();
     } else {
-        console.error("Category not found.");
+      console.error('Category not found.');
     }
   }
+
   nextWord(): void {
     if (this.words && this.index < this.words.length - 1) {
-        this.index++;
-        this.mixWord = [...this.words[this.index].origin]
-          .sort(() => Math.random() - 0.5)
-          .join('');
+      this.index++;
+      this.mixWord = [...this.words[this.index].origin]
+        .sort(() => Math.random() - 0.5)
+        .join('');
     }
   }
   reset(): void {
@@ -105,13 +118,13 @@ export class MixdWordsComponent implements OnInit {
         secondLeftInGame: this.timerComponent.getTimeLeft(),
         secondsPlayed: this.gameDuration - this.timerComponent.getTimeLeft(),
       };
-      
+
       this.gamePlayedService.saveGame(game);
 
       this.dialogService.open(WinLoseComponent, {
         data: isSuccess,
         width: '400px',
-        disableClose: true
+        disableClose: true,
       });
     } else {
       this.nextWord();
@@ -121,7 +134,7 @@ export class MixdWordsComponent implements OnInit {
 
   startNewGame(): void {
     this.isLoading = true;
-    this.index = -1;
+    this.index = 0;
     this.numSuccess = 0;
     this.endGame = false;
     this.tryCount = 0;
@@ -133,7 +146,7 @@ export class MixdWordsComponent implements OnInit {
       this.words = this.currentCategory.words || [];
       this.isLoading = false;
     } else {
-      console.error("Error loading category.");
+      console.error('Error loading category.');
       this.isLoading = false;
     }
   }
