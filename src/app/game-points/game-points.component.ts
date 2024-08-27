@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-game-points',
@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './game-points.component.css',
 })
 export class GamePointsComponent {
-  points: number = 0;
+  @Input() public points: number = 0;
 }

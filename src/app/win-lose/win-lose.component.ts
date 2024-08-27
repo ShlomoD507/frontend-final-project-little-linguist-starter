@@ -1,16 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogClose } from '@angular/material/dialog';
+
+export class WinLoseData {
+  isSuccess: boolean = false;
+}
 
 @Component({
   selector: 'app-win-lose',
   standalone: true,
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule, MatButtonModule, MatDialogClose],
   templateUrl: './win-lose.component.html',
-  styleUrl: './win-lose.component.css'
+  styleUrl: './win-lose.component.css',
 })
 export class WinLoseComponent {
-  data?: { isSuccess: boolean };
-
+  constructor(@Inject(MAT_DIALOG_DATA) public data: WinLoseData) {
+    console.log(data);
+  }
 }

@@ -1,8 +1,7 @@
-<p>win-lose works!</p>
 <h1 mat-dialog-title>Game Result</h1>
 <div mat-dialog-content>
-  <p>{{ data?.isSuccess ? 'You Won!' : 'Try Again!' }}</p>
+  <p>{{ data.isSuccess ? 'Correct' : 'Wrong!' }}</p>
 </div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button [mat-dialog-close]="true">Close</button>
 </div>

@@ -10,7 +10,7 @@ import { CategoriesService } from './../services/categories.service';
 import { Category } from './../../shared/model/category';
 import { TranslatedWord } from '../../shared/model/translated-word';
 import { TimerComponent } from '../timer/timer.component';
-import { WinLoseComponent } from '../win-lose/win-lose.component';
+import { WinLoseComponent, WinLoseData } from '../win-lose/win-lose.component';
 import { ExitDialogComponent } from '../exit-dialog/exit-dialog.component';
 import { GamePlayedService } from './../services/game-played.service';
 import { GamePlayed } from '../../shared/model/game-played.model';
@@ -50,12 +50,13 @@ import { GamePointsComponent } from '../game-points/game-points.component';
 })
 export class MixdWordsComponent implements OnInit {
   @Input() id: string = '';
+  @ViewChild(TimerComponent) timerComponent!: TimerComponent;
   words: TranslatedWord[] = [];
   index: number = 0;
   mixedWord: string = '';
   numSuccess: number = 0;
   endGame: boolean = false;
-  tryCount: number = 0;
+  successPoints: number = 0;
   gamePoints: number = 0;
   gameDuration: number = 0;
   displayTimeLeft: string = '';
@@ -66,9 +67,6 @@ export class MixdWordsComponent implements OnInit {
     Language.English,
     []
   );
-
-  @ViewChild(TimerComponent) timerComponent!: TimerComponent;
-  guess?: string;
 
   constructor(
     private categoriesService: CategoriesService,
@@ -81,6 +79,7 @@ export class MixdWordsComponent implements OnInit {
     if (category) {
       this.currentCategory = category;
       this.words = this.currentCategory.words;
+      this.successPoints = Math.floor(100 / this.currentCategory.words.length);
       this.startNewGame();
     } else {
       console.error('Category not found.');
@@ -104,18 +103,27 @@ export class MixdWordsComponent implements OnInit {
   }
 
   submit(): void {
-    this.tryCount++;
-    const currentWord = this.words && this.words[this.index];
-    const isSuccess = currentWord?.guess === currentWord?.origin;
-    const isEndOfGame = this.index + 1 === this.words?.length;
+    const currentWord = this.words[this.index];
+    if (!currentWord || currentWord.guess == '') {
+      console.log('submit() nothing to check');
+      return;
+    }
+
+    // האם הניחוש זהה למילה המקורית
+    const isSuccess =
+      currentWord.guess.toUpperCase() === currentWord.origin.toUpperCase();
+    console.log('is -', currentWord.guess, currentWord.origin);
+    this.endGame = this.index + 1 === this.words.length;
 
     if (isSuccess) {
       this.numSuccess++;
-    } else {
-      this.gamePoints -= 2;
+      this.gamePoints += this.successPoints;
     }
 
-    if (isEndOfGame) {
+    // נעבור למילה הבאה
+    this.index++;
+
+    if (this.endGame) {
       const game: GamePlayed = {
         date: new Date(),
         idCategory: this.id,
@@ -125,13 +133,15 @@ export class MixdWordsComponent implements OnInit {
       };
 
       this.gamePlayedService.saveGame(game);
-
-      this.dialogService.open(WinLoseComponent, {
-        data: isSuccess,
-        width: '400px',
-        disableClose: true,
-      });
     } else {
+      const dataToSend = new WinLoseData();
+      dataToSend.isSuccess = isSuccess;
+
+      // נציג הודעה אם המשתמש הצליח או לא
+      this.dialogService.open(WinLoseComponent, {
+        data: dataToSend,
+      });
+
       this.mixWord();
       this.reset();
     }
@@ -141,8 +151,6 @@ export class MixdWordsComponent implements OnInit {
     this.index = 0;
     this.numSuccess = 0;
     this.endGame = false;
-    this.tryCount = 0;
-    this.gamePoints = 16;
     this.mixWord();
   }
 

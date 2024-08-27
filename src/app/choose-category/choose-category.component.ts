@@ -33,11 +33,13 @@ export class ChooseCategoryComponent implements OnInit {
   public GameId?: Category;
   public allCategories: Category[] = [];
   public selectedCategory: Category | undefined;
+
   constructor(
     private categoryService: CategoriesService,
     @Inject(MAT_DIALOG_DATA) public selectedGame: GameProfile,
     private router: Router
   ) {}
+
   ngOnInit(): void {
     this.allCategories = this.categoryService.list();
   }
