@@ -18,4 +18,11 @@ export class WinLoseComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: WinLoseData) {
     console.log(data);
   }
+
+  // פונקציה להחזיר את הודעת התוצאה
+  getResultMessage(): string {
+    return this.data.isSuccess ? 'Correct!' : 'Wrong!';
+  }
+
 }
+

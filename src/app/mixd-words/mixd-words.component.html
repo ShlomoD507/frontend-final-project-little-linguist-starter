@@ -6,17 +6,11 @@
   </div>
 
   <div *ngIf="!endGame">
-
-
     <div class="word-display">
       <span class="original-word">{{ words[index].target }}</span>
       <span class="mixed-word">{{ mixedWord }}</span>
     </div>
 
-    <!-- <div class="timer-container">
-      <mat-icon>alarm</mat-icon>
-      <app-timer [duration]="gameDuration"></app-timer>
-    </div> -->
 
     <form class="mainForm" #mixWordForm="ngForm" (ngSubmit)="submit()">
       <mat-form-field class="GuessInput" color="primary">
@@ -30,10 +24,7 @@
           [disabled]="mixWordForm.invalid || mixWordForm.pending">Submit</button>
       </div>
     </form>
-
-
   </div>
-
   <div *ngIf="endGame">
     <h2>Game suammry</h2>
     <table mat-table [dataSource]="words" class="mat-elevation-z8">
@@ -77,3 +68,8 @@
 
 
 <!--<input matInput [(ngModel)]="words[index]?.guess" name="guess" #guessField="ngModel" required />-->
+
+    <!-- <div class="timer-container">
+      <mat-icon>alarm</mat-icon>
+      <app-timer [duration]="gameDuration"></app-timer>
+    </div> -->

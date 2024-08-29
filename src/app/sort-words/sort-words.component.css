@@ -1,13 +1,14 @@
-h1{
+/* sort-words.component.css */
+
+h1 {
   font-size: 34px;
   text-align: center;
   font-weight: bold;
   color: rgb(60, 60, 135);
   background: linear-gradient(to top left, rgb(159, 236, 236), rgb(230, 230, 147));
-  font-weight: bold;
 }
 
-.id{
+.id {
   font-size: 10px;
   text-align: center;
 }
@@ -16,4 +17,68 @@ h1{
   font-weight: bold;
   text-align: center;
   font-size: 15px;
+}
+
+/* Additional Styles for the Game */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.progress-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.progress-bar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  gap: 10px;
+}
+
+.current-word-count, .total-word-count, .progress-text {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.mat-progress-bar {
+  flex: 1;
+}
+
+.mat-elevation-z8 {
+  margin: 20px auto;
+  width: 80%;
+}
+
+.mat-header-cell, .mat-cell {
+  text-align: center;
+  font-size: 16px;
+}
+
+.mat-icon {
+  vertical-align: middle;
+}
+
+h2 {
+  text-align: center;
+  font-size: 28px;
+  color: rgb(60, 60, 135);
+}
+
+h3 {
+  text-align: center;
+  font-size: 24px;
+  color: rgb(60, 60, 135);
+  margin: 20px 0;
+}
+
+.mat-stroked-button {
+  display: block;
+  margin: 20px auto;
 }

@@ -18,8 +18,8 @@ export class DialogService {
     
     this.dialog.open(WinLoseComponent, {
       data: { isSuccess },
-      width: '400px',
       disableClose: true
     });
   }
 }
+

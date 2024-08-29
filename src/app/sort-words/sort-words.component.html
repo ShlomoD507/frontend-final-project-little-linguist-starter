@@ -1,3 +1,47 @@
-<h1>Sort Words - {{currentCategory?.name}}</h1>
-<div class="id" >Category id {{id}}</div>
-<!--<div class="name" > Category name {{currentCategory?.name}}</div>-->
+<h1>Sort Words - {{ currentCategory?.name }}</h1>
+
+<div *ngIf="!endGame">
+  <p>Is the word <b>{{ wordPool[currentWordIndex].origin }}</b> part of the <b>{{ currentCategory?.name }}</b> category?</p>
+  <div class="button-group">
+    <button mat-stroked-button color="primary" (click)="onGuess(true)">Yes</button>
+    <button mat-stroked-button color="warn" (click)="onGuess(false)">No</button>
+  </div>
+
+  <div class="progress-container">
+    <div class="progress-bar">
+      <span class="current-word-count">{{ currentWordIndex + 1 }}</span>
+      <mat-progress-bar mode="determinate" [value]="calculateProgress()"></mat-progress-bar>
+      <span class="total-word-count">{{ wordPool.length }}</span>
+      <div class="progress-text">{{ calculateProgress() | number : '1.0-0' }}%</div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="endGame">
+    <h2>Game Summary</h2>
+    <table mat-table [dataSource]="wordPool" class="mat-elevation-z8">
+      <ng-container matColumnDef="word">
+        <th mat-header-cell *matHeaderCellDef> Word </th>
+        <td mat-cell *matCellDef="let word"> {{ word.origin }} </td>
+      </ng-container>
+      <ng-container matColumnDef="correctCategory">
+        <th mat-header-cell *matHeaderCellDef> Correct Category </th>
+        <td mat-cell *matCellDef="let word"> {{ word.origin === currentCategory?.name ? 'Yes' : 'No' }} </td>
+      </ng-container>
+      <ng-container matColumnDef="userGuess">
+        <th mat-header-cell *matHeaderCellDef> Your Guess </th>
+        <td mat-cell *matCellDef="let word, let i = index">
+          <mat-icon *ngIf="word.origin === currentCategory?.name">check_circle</mat-icon>
+          <mat-icon *ngIf="word.origin !== currentCategory?.name">cancel</mat-icon>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="['word', 'correctCategory', 'userGuess']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['word', 'correctCategory', 'userGuess'];"></tr>
+    </table>
+    <h3>Your Score: {{ userPoints }}/100</h3>
+    <div class="button-group">
+      <button mat-stroked-button (click)="navigateToChooseGame()">New Game</button>
+    </div>
+  </div>
+  
