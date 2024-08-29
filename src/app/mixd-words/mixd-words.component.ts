@@ -91,8 +91,11 @@ export class MixdWordsComponent implements OnInit {
   }
 
   mixWord(): void {
-    if (this.words && this.index < this.words.length - 1) {
-      console.log('mixing word');
+    console.log('mixing word'+this.index);
+    if (this.words && this.index < this.words.length ) {
+    if (this.index === 0) {
+        this.index = Math.floor(Math.random() * this.words.length);
+    }
       this.mixedWord = [...this.words[this.index].origin]
         .sort(() => Math.random() - 0.5)
         .join(' ')
@@ -113,7 +116,6 @@ export class MixdWordsComponent implements OnInit {
       return;
     }
 
-    // האם הניחוש זהה למילה המקורית
     const isSuccess =
       currentWord.guess.toUpperCase() === currentWord.origin.toUpperCase();
     console.log('is -', currentWord.guess, currentWord.origin);
@@ -124,7 +126,6 @@ export class MixdWordsComponent implements OnInit {
       this.gamePoints += this.successPoints;
     }
 
-    // נעבור למילה הבאה
     this.index++;
 
     if (this.endGame) {
@@ -140,8 +141,6 @@ export class MixdWordsComponent implements OnInit {
     } else {
       const dataToSend = new WinLoseData();
       dataToSend.isSuccess = isSuccess;
-
-      // נציג הודעה אם המשתמש הצליח או לא
       this.dialogService.open(WinLoseComponent, {
         data: dataToSend,
       });

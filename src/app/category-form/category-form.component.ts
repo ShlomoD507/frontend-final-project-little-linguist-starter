@@ -31,7 +31,7 @@ import { TranslatedWord } from '../../shared/model/translated-word';
 export class CategoryFormComponent implements OnInit {
   currentCategory = new Category(
     0,
-    'fake-category',
+    '',
     Language.English,
     Language.Hebrew,
     []
