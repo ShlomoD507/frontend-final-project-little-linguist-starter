@@ -1,7 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Category } from './../../shared/model/category';
 import { CategoriesService } from './../services/categories.service';
-import { SortWordsDialogService } from './../services/sort-words-dialog.service'; // ייבוא השירות החדש
+import { SortWordsDialogService } from './../services/sort-words-dialog.service';
+import { MatDialog } from '@angular/material/dialog'; // ייבוא MatDialog
+import { ExitDialogComponent } from '../exit-dialog/exit-dialog.component'; // ייבוא ExitDialogComponent
 import { TranslatedWord } from '../../shared/model/translated-word';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -11,10 +14,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
-import { RouterModule,Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { ExitButtonComponent } from '../exit-button/exit-button.component';
 import { GamePointsComponent } from '../game-points/game-points.component';
-
 
 @Component({
   selector: 'app-sort-words',
@@ -52,7 +54,8 @@ throw new Error('Method not implemented.');
 
   constructor(
     private categoriesService: CategoriesService,
-    private dialogService: SortWordsDialogService, // שימוש בשירות החדש
+    private dialogService: SortWordsDialogService,
+    private dialog: MatDialog, // הוספת MatDialog לשימוש ב-Exit Dialog
     private router: Router
   ) {}
 
@@ -95,24 +98,38 @@ throw new Error('Method not implemented.');
 
   onGuess(isCorrectGuess: boolean): void {
     const currentWord = this.wordPool[this.currentWordIndex];
-    const isWordInCategory = this.currentCategory?.words.some(word => word.origin === currentWord.origin) || false;
+    const isWordInCategory = this.currentCategory?.words.includes(currentWord) || false;
+
     const isCorrect = isCorrectGuess === isWordInCategory;
 
     if (isCorrect) {
-        this.userPoints += this.wordPoints;
+      this.userPoints += this.wordPoints;
     }
+
     this.dialogService.submit(isCorrect);
 
     this.currentWordIndex++;
+
     if (this.currentWordIndex >= this.wordPool.length) {
-        this.endGame = true;
+      this.endGame = true;
     }
-}
+  }
 
   calculateProgress(): number {
     return (this.currentWordIndex / this.wordPool.length) * 100;
   }
+
   startNewGame(): void {
-    this.ngOnInit();
+    this.ngOnInit(); // אתחול מחדש של המשחק
+  }
+
+  // פונקציה לפתיחת דיאלוג יציאה
+  exitGame(): void {
+    const dialogRef = this.dialog.open(ExitDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) { // או התנאי הנכון שגורם ליציאה מהמשחק
+        this.router.navigate(['/']); // נווט לדף הבית או דף אחר
+      }
+    });
   }
 }

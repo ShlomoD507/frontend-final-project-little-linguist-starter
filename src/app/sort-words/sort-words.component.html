@@ -1,4 +1,10 @@
-<h1>Sort Words - {{ currentCategory?.name }}</h1>
+
+<div class="container">
+  <div class="headTitle">
+    <app-exit-button class="exitgame" (click)="exitGame()">exit_to_app</app-exit-button>
+    <h2>Sort Words - {{ currentCategory?.name }}</h2>
+    <app-game-points [points]="userPoints"></app-game-points>
+  </div>
 
 <div *ngIf="!endGame">
   <p>Is the word <b>{{ wordPool[currentWordIndex].origin }}</b> part of the <b>{{ currentCategory?.name }}</b> category?</p>
