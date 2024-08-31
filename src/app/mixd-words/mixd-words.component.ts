@@ -26,6 +26,7 @@ import { ExitButtonComponent } from '../exit-button/exit-button.component';
 import { Language } from '../../shared/model/language';
 import { GamePointsComponent } from '../game-points/game-points.component';
 import { MatTableModule } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mixd-words',
@@ -47,7 +48,7 @@ import { MatTableModule } from '@angular/material/table';
     MatTableModule,
   ],
   templateUrl: './mixd-words.component.html',
-  styleUrls: ['./mixd-words.component.css'],
+  styleUrl: './mixd-words.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MixdWordsComponent implements OnInit {
@@ -75,8 +76,12 @@ export class MixdWordsComponent implements OnInit {
   constructor(
     private categoriesService: CategoriesService,
     private dialogService: MatDialog,
-    private gamePlayedService: GamePlayedService
+    private gamePlayedService: GamePlayedService,
+    private router: Router
   ) {}
+  navigateToChooseGame() {
+    this.router.navigate(['choose-your-game']);
+  }
 
   ngOnInit(): void {
     const category = this.categoriesService.get(parseInt(this.id));
@@ -157,7 +162,9 @@ export class MixdWordsComponent implements OnInit {
 
   exitGame(): void {
     this.dialogService.open(ExitDialogComponent);
+
   }
+
 
   calculateProgress(): number {
     const totalWords = this.words?.length || 0;

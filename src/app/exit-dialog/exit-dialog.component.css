@@ -1,12 +1,18 @@
 .container {
-  size: 100px;  
+  padding: 20px; 
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  text-align: center;
   display: flex;
-    background-color: aliceblue;
-    border: 2px solid #00ff11;
-    border-radius: 8px;
-    margin: 20px;
-    background: linear-gradient(to top left, rgb(159, 236, 236), rgb(230, 230, 147));
-  }
+  background-color: aliceblue;
+  border: 2px solid #00ff11;
+  border-radius: 8px; 
+  width: 400px;
+  background: linear-gradient(to top left, rgb(159, 236, 236), rgb(230, 230, 147));
+  display: flex;
+  flex-direction: column;
+}
+  
   h2{
     display: flex;
     align-items: center;
@@ -14,14 +20,16 @@
     margin: 50px auto;
   }
 
-  button-row {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-  
-  mat-form-field{
-    display: flex;
-   align-items: center;
-   justify-content: center;
-  }
+  .button-row{
+  color: #ffffff; 
+  padding: 10px 20px; 
+  font-size: 16px; 
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s; 
+  margin: 10px;
+}
+
+button:hover {
+  background-color: #e3eef94d; 
+  transform: scale(1.05); 
+}

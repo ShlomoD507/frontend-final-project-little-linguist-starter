@@ -18,8 +18,8 @@ h2 {
   flex: 1;
   flex-grow: 1;
   width: calc(100% - 550px); 
-  margin-left: 350px; 
-  margin-right: 350px; 
+  margin-left: 225px; 
+  margin-right: 225px; 
 }
 
 .exitgame {
@@ -114,10 +114,6 @@ mat-icon {
   margin: 0 10px;
 }
 
-.headTitle {
-  display: flex;
-  width: 100%;  
-}
 
 .gamepoint {
   font-size: large;
@@ -134,8 +130,7 @@ mat-icon {
   background: linear-gradient(
     to top left,
     rgb(159, 236, 236),
-    rgb(230, 230, 147)
-  );
+    rgb(230, 230, 147));
   padding: 7px;
   border-radius: 10px;
   margin-bottom: 20px;
@@ -143,9 +138,36 @@ mat-icon {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.9s;
-  flex: 1;
-  flex-grow: 1;
-  width: calc(100% - 100px); 
+  width: calc(80% - 100px); 
   margin-left: 40px; 
   margin-right: 50px; 
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.button-group button {
+  width: auto;
+  padding: 10px 20px; /* ריווח פנימי לכפתור */
+  margin: 10px; /* ריווח חיצוני סביב הכפתור */
+  font-size: 18px; /* גודל פונט */
+  border-radius: 8px; /* עיגול הפינות של הכפתור */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* הוספת צל קל */
+  background-color: #ffffff; /* צבע רקע לכפתור */
+  transition: transform 0.3s, box-shadow 0.3s; /* הוספת מעבר חלק כאשר הכפתור נלחץ */
+}
+
+.button-group button:hover {
+  background-color: #e0f7fa; /* צבע רקע כאשר מרחפים מעל הכפתור */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* צל גדול יותר כאשר מרחפים מעל הכפתור */
+  transform: scale(1.05); /* הגדלת הכפתור מעט כאשר מרחפים מעליו */
+}
+
+.button-group button:active {
+  background-color: #b2ebf2; /* צבע רקע כאשר הכפתור נלחץ */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* צל קטן יותר כאשר הכפתור נלחץ */
+  transform: scale(0.98); /* הקטנה קטנה של הכפתור כאשר נלחץ */
 }

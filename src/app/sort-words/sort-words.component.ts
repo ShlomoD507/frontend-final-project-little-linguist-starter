@@ -38,7 +38,7 @@ import { Language } from '../../shared/model/language';
     MatTableModule,
   ],
   templateUrl: './sort-words.component.html',
-  styleUrls: ['./sort-words.component.css'],
+  styleUrl: './sort-words.component.css',
 })
 export class SortWordsComponent implements OnInit {
   @Input() id: string = '';
