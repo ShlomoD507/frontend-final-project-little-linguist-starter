@@ -82,7 +82,9 @@ export class MixdWordsComponent implements OnInit {
     const category = this.categoriesService.get(parseInt(this.id));
     if (category) {
       this.currentCategory = category;
-      this.words = this.currentCategory.words;
+      this.words = [...this.currentCategory.words].sort(
+        () => Math.random() - 0.5
+      );
       this.successPoints = Math.floor(100 / this.currentCategory.words.length);
       this.startNewGame();
     } else {
@@ -91,11 +93,8 @@ export class MixdWordsComponent implements OnInit {
   }
 
   mixWord(): void {
-    console.log('mixing word'+this.index);
-    if (this.words && this.index < this.words.length ) {
-    if (this.index === 0) {
-        this.index = Math.floor(Math.random() * this.words.length);
-    }
+    console.log('mixing word' + this.index);
+    if (this.words && this.index < this.words.length) {
       this.mixedWord = [...this.words[this.index].origin]
         .sort(() => Math.random() - 0.5)
         .join(' ')
