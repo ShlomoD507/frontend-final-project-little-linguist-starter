@@ -1,7 +1,12 @@
-<h1 mat-dialog-title>Game Result</h1>
-<div mat-dialog-content>
-  <p>{{ data.isSuccess ? 'Correct' : 'Wrong!' }}</p>
-</div>
-<div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="true">Close</button>
+ 
+<div class="winlose">
+  <h1 mat-dialog-title>Game Result</h1>
+  <div mat-dialog-content>
+    <br>
+    <H2 [ngClass]="{'correct': data.isSuccess, 'wrong': !data.isSuccess}">{{ data.isSuccess ? 'Correct' : 'Wrong!' }}</H2>
+  </div>
+  <div mat-dialog-actions>
+    <br>
+    <button mat-button [mat-dialog-close]="true">Close</button>
+  </div>
 </div>

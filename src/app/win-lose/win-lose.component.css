@@ -1,0 +1,58 @@
+/* עיצוב הכלל של winlose */
+.winlose {
+    padding: 20px; /* רווח פנימי */
+    border-radius: 12px; /* פינות מעוגלות */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* צל רך */
+    text-align: center; /* ממרכז את התוכן */
+    display: flex;
+    background-color: aliceblue;
+    border: 2px solid #00ff11;
+    border-radius: 8px; /* פינות מעוגלות - אם צריך לשים רק אחת */
+    width: 400px;
+    background: linear-gradient(to top left, rgb(159, 236, 236), rgb(230, 230, 147));
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* עיצוב של כותרת הפופ-אפ */
+  h1{
+    font-size: 24px; /* גובה גופן של כותרת */
+    color: #333333; /* צבע טקסט כהה */
+    font-weight: bold; /* בולד */
+    border-bottom: 2px solid #f1f1f1; /* קו תחתון קל */
+    margin: 10px;
+  }
+  
+  /* עיצוב של תוכן הפופ-אפ */
+  .H2 {
+    text-size-adjust: 28px; /* גובה גופן של תוכן */
+    color: #666666; /* צבע טקסט אפור כהה */
+    margin: 10px;
+  }
+  
+  .correct {
+    color: green; /* צבע ירוק */
+  }
+  
+  .wrong {
+    color: red; /* צבע אדום */
+  } 
+  
+  button {
+    background-color: #007bff; /* צבע רקע כחול */
+    color: #ffffff; /* צבע טקסט לבן */
+    border: 2px solid transparent; /* גבול עם צבע שקוף, כדאי להגדיר צבע וסגנון */
+    border-radius: 8px; /* פינות מעוגלות */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px; /* רווח פנימי */
+    font-size: 16px; /* גובה גופן */
+    cursor: pointer; /* אצבע בברור */
+    transition: background-color 0.3s, transform 0.2s; /* מעבר חלק לצבע ולמיקום */
+    margin: 10px;
+  }
+  
+  /* אפקט ריחוף על הכפתור */
+  button:hover {
+    background-color: #0056b3; /* צבע רקע כהה יותר */
+    transform: scale(1.05); /* הגדלת הכפתור במעט */
+  }
