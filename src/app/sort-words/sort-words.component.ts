@@ -17,6 +17,7 @@ import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { ExitButtonComponent } from '../exit-button/exit-button.component';
 import { GamePointsComponent } from '../game-points/game-points.component';
+import { Language } from '../../shared/model/language';
 
 @Component({
   selector: 'app-sort-words',
@@ -34,20 +35,17 @@ import { GamePointsComponent } from '../game-points/game-points.component';
     NgFor,
     NgIf,
     GamePointsComponent,
-    MatTableModule
+    MatTableModule,
   ],
   templateUrl: './sort-words.component.html',
   styleUrls: ['./sort-words.component.css'],
 })
 export class SortWordsComponent implements OnInit {
-navigateToChooseGame() {
-throw new Error('Method not implemented.');
-}
   @Input() id: string = '';
-  currentCategory: Category | undefined;
-  randomCategory: Category | undefined;
+  currentCategory: Category;
+  randomCategory: Category;
   wordPool: TranslatedWord[] = [];
-  currentWordIndex: number = 0;
+  currentPoolIndex: number = 0;
   userPoints: number = 0;
   wordPoints: number = 0;
   endGame: boolean = false;
@@ -57,29 +55,40 @@ throw new Error('Method not implemented.');
     private dialogService: SortWordsDialogService,
     private dialog: MatDialog, // הוספת MatDialog לשימוש ב-Exit Dialog
     private router: Router
-  ) {}
+  ) {
+    this.currentCategory = new Category(
+      -1,
+      'fake-category',
+      Language.English,
+      Language.Hebrew,
+      []
+    );
+    this.randomCategory = this.currentCategory;
+  }
+
+  navigateToChooseGame() {
+    this.router.navigate(['choose-your-game']);
+  }
 
   ngOnInit(): void {
-    this.currentCategory = this.categoriesService.get(parseInt(this.id));
-    if (this.currentCategory) {
+    const selectedCateogry = this.categoriesService.get(parseInt(this.id));
+
+    if (selectedCateogry) {
+      this.currentCategory = selectedCateogry;
       this.randomCategory = this.getRandomCategory();
 
-      if (this.randomCategory) {
-        const currentWords = this.getRandomWords(this.currentCategory, 3);
-        const randomWords = this.getRandomWords(this.randomCategory, 3);
+      const currentWords = this.getRandomWords(this.currentCategory);
+      const randomWords = this.getRandomWords(this.randomCategory);
 
-        this.wordPool = this.shuffleWords([...currentWords, ...randomWords]);
+      this.wordPool = this.shuffleWords([...currentWords, ...randomWords]);
 
-        this.wordPoints = Math.floor(100 / this.wordPool.length);
-      } else {
-        console.error('לא ניתן היה לבחור קטגוריה רנדומלית.');
-      }
+      this.wordPoints = Math.floor(100 / this.wordPool.length);
     } else {
       console.error('קטגוריה נוכחית לא נמצאה.');
     }
   }
 
-  getRandomCategory(): Category | undefined {
+  getRandomCategory(): Category {
     const allCategories = this.categoriesService.list();
     const filteredCategories = allCategories.filter(
       (cat) => cat.id !== this.currentCategory?.id
@@ -88,35 +97,54 @@ throw new Error('Method not implemented.');
     return filteredCategories[randomIndex];
   }
 
-  getRandomWords(category: Category, count: number): TranslatedWord[] {
-    return category.words.sort(() => Math.random() - 0.5).slice(0, count);
+  getRandomWords(category: Category): TranslatedWord[] {
+    return category.words.sort(() => Math.random() - 0.5);
   }
 
   shuffleWords(words: TranslatedWord[]): TranslatedWord[] {
     return words.sort(() => Math.random() - 0.5);
   }
 
-  onGuess(isCorrectGuess: boolean): void {
-    const currentWord = this.wordPool[this.currentWordIndex];
-    const isWordInCategory = this.currentCategory?.words.includes(currentWord) || false;
+  isWordInCurrentCateogry(word: string) {
+    const isWordInCategory = this.currentCategory.words.some(
+      (trasnlatedWord) =>
+        trasnlatedWord.origin.toLowerCase() === word.toLowerCase()
+    );
+    return isWordInCategory;
+  }
 
-    const isCorrect = isCorrectGuess === isWordInCategory;
+  isGuessCorrect(word: string, guess: string) {
+    const isInCategory = this.isWordInCurrentCateogry(word);
+    const isCorrect =
+      (guess === 'Yes' && isInCategory) || (guess === 'No' && !isInCategory);
+    return isCorrect;
+  }
 
+  onGuess(guess: boolean): void {
+    const currentTranslatedWord = this.wordPool[this.currentPoolIndex];
+    currentTranslatedWord.guess = guess ? 'Yes' : 'No';
+
+    console.log(this.wordPool);
+    console.log(currentTranslatedWord);
+    const isCorrect = this.isGuessCorrect(
+      currentTranslatedWord.origin,
+      currentTranslatedWord.guess
+    );
     if (isCorrect) {
       this.userPoints += this.wordPoints;
     }
 
     this.dialogService.submit(isCorrect);
 
-    this.currentWordIndex++;
+    this.currentPoolIndex++;
 
-    if (this.currentWordIndex >= this.wordPool.length) {
+    if (this.currentPoolIndex >= this.wordPool.length) {
       this.endGame = true;
     }
   }
 
   calculateProgress(): number {
-    return (this.currentWordIndex / this.wordPool.length) * 100;
+    return (this.currentPoolIndex / this.wordPool.length) * 100;
   }
 
   startNewGame(): void {
@@ -126,9 +154,10 @@ throw new Error('Method not implemented.');
   // פונקציה לפתיחת דיאלוג יציאה
   exitGame(): void {
     const dialogRef = this.dialog.open(ExitDialogComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === true) { // או התנאי הנכון שגורם ליציאה מהמשחק
-        this.router.navigate(['/']); // נווט לדף הבית או דף אחר
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        // או התנאי הנכון שגורם ליציאה מהמשחק
+        this.router.navigate(['choose-your-game']);
       }
     });
   }

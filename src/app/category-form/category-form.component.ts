@@ -29,13 +29,7 @@ import { TranslatedWord } from '../../shared/model/translated-word';
   styleUrl: './category-form.component.css',
 })
 export class CategoryFormComponent implements OnInit {
-  currentCategory = new Category(
-    0,
-    '',
-    Language.English,
-    Language.Hebrew,
-    []
-  );
+  currentCategory = new Category(0, '', Language.English, Language.Hebrew, []);
   displayedColumns: string[] = ['Origin', 'Target', 'Actions'];
 
   @Input()
@@ -79,6 +73,6 @@ export class CategoryFormComponent implements OnInit {
       this.categoriesService.add(this.currentCategory);
     }
 
-    this.router.navigate(['']);
+    this.router.navigate(['choose-your-game']);
   }
 }
