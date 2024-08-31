@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { Category } from './../../shared/model/category';
 import { CategoriesService } from './../services/categories.service';
 import { SortWordsDialogService } from './../services/sort-words-dialog.service';
-import { MatDialog } from '@angular/material/dialog'; // ייבוא MatDialog
-import { ExitDialogComponent } from '../exit-dialog/exit-dialog.component'; // ייבוא ExitDialogComponent
+import { MatDialog } from '@angular/material/dialog'; 
+import { ExitDialogComponent } from '../exit-dialog/exit-dialog.component'; 
 import { TranslatedWord } from '../../shared/model/translated-word';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
