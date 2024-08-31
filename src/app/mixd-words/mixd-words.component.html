@@ -2,7 +2,9 @@
   <div class="headTitle">
     <app-exit-button class="exitgame" (click)="exitGame()">exit_to_app</app-exit-button>
     <h2>Mixed Words - {{ currentCategory.name }}</h2>
+  <div class ="gamepoint">
     <app-game-points [points]="gamePoints"></app-game-points>
+  </div>
   </div>
 
   <div *ngIf="!endGame">
@@ -26,7 +28,7 @@
     </form>
   </div>
   <div *ngIf="endGame">
-    <h2>Game summary</h2>
+    <h3 class="hederSummery">Game summary</h3>
     <table mat-table [dataSource]="words" class="mat-elevation-z8">
 
       <!-- Hebrew Column -->

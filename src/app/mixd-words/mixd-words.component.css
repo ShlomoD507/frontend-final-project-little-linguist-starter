@@ -8,29 +8,35 @@ h2 {
     rgb(159, 236, 236),
     rgb(230, 230, 147)
   );
-  padding: 10px;
+  padding: 7px;
   border-radius: 10px;
   margin-bottom: 20px;
+  border: 2px solid #00ff44;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.9s;
+  flex: 1;
+  flex-grow: 1;
+  width: calc(100% - 550px); 
+  margin-left: 350px; 
+  margin-right: 350px; 
 }
 
 .exitgame {
-  margin-bottom: 20px;
+  position: absolute;
+  top: 105PX;
+  right: 350px;
 }
 
-.timer-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-}
 .word-display {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
   flex-direction: column;
-  font-size: x-large;
+  font-size: 30px;
 }
+
 .GuessInput{
   display: flex;
   align-items: center;
@@ -42,9 +48,7 @@ form {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  align-items: center;
   width: 100%;
-  max-width: 200px;
   margin-top: 20px;
 }
 
@@ -55,6 +59,8 @@ button {
   flex-direction: row;
   width: 50px;
   margin-top: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .progress-container {
@@ -74,6 +80,10 @@ button {
   align-items: center;
   flex-grow: 1;
   margin: 0 10px;
+  border-radius: 5px; 
+  position: relative;
+  overflow: hidden;
+
 }
 
 .progress-text {
@@ -94,6 +104,7 @@ mat-icon {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+
 }
 
 .current-word-count,
@@ -105,9 +116,36 @@ mat-icon {
 
 .headTitle {
   display: flex;
-  width: 100%;
+  width: 100%;  
 }
-h2 {
+
+.gamepoint {
+  font-size: large;
+  position: absolute;
+  top: 95PX;
+  right: 430px;
+}
+
+.hederSummery {
+  font-size: 34px;  
+  text-align: center;
+  font-weight: bold;
+  color: rgb(60, 60, 135);
+  background: linear-gradient(
+    to top left,
+    rgb(159, 236, 236),
+    rgb(230, 230, 147)
+  );
+  padding: 7px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 2px solid #00ff44;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.9s;
   flex: 1;
   flex-grow: 1;
+  width: calc(100% - 100px); 
+  margin-left: 40px; 
+  margin-right: 50px; 
 }
