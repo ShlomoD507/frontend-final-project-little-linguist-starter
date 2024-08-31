@@ -127,7 +127,6 @@ export class MixdWordsComponent implements OnInit {
     }
 
     this.index++;
-
     if (this.endGame) {
       const game: GamePlayed = {
         date: new Date(),
