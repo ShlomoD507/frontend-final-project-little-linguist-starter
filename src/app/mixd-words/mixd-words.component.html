@@ -32,13 +32,13 @@
       <!-- Hebrew Column -->
       <ng-container matColumnDef="hebrew">
         <th mat-header-cell *matHeaderCellDef> Hebrew </th>
-        <td mat-cell *matCellDef="let element"> {{element.origin}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.target}} </td>
       </ng-container>
 
       <!-- English Column -->
       <ng-container matColumnDef="english">
         <th mat-header-cell *matHeaderCellDef> English </th>
-        <td mat-cell *matCellDef="let element"> {{element.target}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.origin}} </td>
       </ng-container>
 
       <!-- IsCorrect Column with Icon -->
@@ -69,7 +69,7 @@
 
 <!--<input matInput [(ngModel)]="words[index]?.guess" name="guess" #guessField="ngModel" required />-->
 
-    <!-- <div class="timer-container">
+<!-- <div class="timer-container">
       <mat-icon>alarm</mat-icon>
       <app-timer [duration]="gameDuration"></app-timer>
     </div> -->
