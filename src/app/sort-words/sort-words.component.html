@@ -13,7 +13,7 @@
     </div>
     <div class="progress-container">
       <div class="progress-bar">
-        <span class="current-word-count">{{ currentPoolIndex + 1 }}</span>
+        <span class="current-word-count">{{ currentPoolIndex  }}</span>
         <mat-progress-bar mode="determinate" [value]="calculateProgress()"></mat-progress-bar>
         <span class="total-word-count">{{ wordPool.length }}</span>
         <div class="progress-text">{{ calculateProgress() | number : '1.0-0' }}%</div>
