@@ -27,7 +27,7 @@
   <div *ngIf="endGame">
     <h3 class="hederSummery">Game summary</h3>
     <br>
-    <p>you translated </p>
+    <p>You translated: {{ numSuccess }} out of : {{ words.length }} words correctly.</p>
     <table mat-table [dataSource]="words" class="mat-elevation-z8">
       <!-- Hebrew Column -->
       <ng-container matColumnDef="hebrew">

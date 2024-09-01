@@ -2,17 +2,15 @@
   <div class="headTitle">
     <app-exit-button class="exitgame" (click)="exitGame()">exit_to_app</app-exit-button>
     <h2>Sort Words - {{ currentCategory.name }}</h2>
-    <app-game-points [points]="userPoints"></app-game-points>
+    <app-game-points [points]="userPoints" class="app-game-points"></app-game-points>
   </div>
-
+  
   <div *ngIf="!endGame">
-    <p>Is the word <b>{{ wordPool[currentPoolIndex].origin }}</b> part of the <b>{{ currentCategory?.name }}</b>
-      category?</p>
+    <p>Is the word <b>{{ wordPool[currentPoolIndex].origin }}</b> part of the <b>{{ currentCategory.name }}</b> category?</p>
     <div class="button-group">
       <button mat-stroked-button color="primary" (click)="onGuess(true)">Yes</button>
       <button mat-stroked-button color="warn" (click)="onGuess(false)">No</button>
     </div>
-
     <div class="progress-container">
       <div class="progress-bar">
         <span class="current-word-count">{{ currentPoolIndex + 1 }}</span>
@@ -25,6 +23,7 @@
   
   <div *ngIf="endGame">
     <h2>Game Summary</h2>
+    <p>You classified {{ getCorrectlyClassifiedCount() }} out of {{ wordPool.length }} words correctly.</p>
     <table mat-table [dataSource]="wordPool" class="mat-elevation-z8">
       <ng-container matColumnDef="word">
         <th mat-header-cell *matHeaderCellDef> Word </th>
@@ -41,7 +40,6 @@
           <mat-icon *ngIf="!isGuessCorrect(word.origin, word.guess)">cancel</mat-icon>
         </td>
       </ng-container>
-
       <tr mat-header-row *matHeaderRowDef="['word', 'userGuess', 'correctCategory']"></tr>
       <tr mat-row *matRowDef="let row; columns: ['word', 'userGuess', 'correctCategory'];"></tr>
     </table>
@@ -50,3 +48,4 @@
       <button mat-stroked-button (click)="navigateToChooseGame()">New Game</button>
     </div>
   </div>
+</div>

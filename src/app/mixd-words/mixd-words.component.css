@@ -1,31 +1,63 @@
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto; /* מרכז את התוכן */
+}
+
+.headTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  position: relative;
+}
+
 h2 {
   font-size: 34px;
+  text-align: center;
+  font-weight: bold;
+  color: rgb(60, 60, 135);
+  background: linear-gradient(to top left, rgb(159, 236, 236), rgb(230, 230, 147));
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 2px solid #00ff44;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%; 
+  margin: 0 auto;
+}
+
+.exitgame {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+}
+
+.gamepoint {
+  font-size: large;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+.hederSummery {
+  font-size: 34px;  
   text-align: center;
   font-weight: bold;
   color: rgb(60, 60, 135);
   background: linear-gradient(
     to top left,
     rgb(159, 236, 236),
-    rgb(230, 230, 147)
-  );
+    rgb(230, 230, 147));
   padding: 7px;
   border-radius: 10px;
   margin-bottom: 20px;
   border: 2px solid #00ff44;
-  border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s, box-shadow 0.9s;
-  flex: 1;
-  flex-grow: 1;
-  width: calc(100% - 550px); 
-  margin-left: 225px; 
-  margin-right: 225px; 
-}
-
-.exitgame {
-  position: absolute;
-  top: 105PX;
-  right: 350px;
+  width: calc(80% - 100px); 
+  margin: 0 auto;
 }
 
 .word-display {
@@ -37,7 +69,7 @@ h2 {
   font-size: 30px;
 }
 
-.GuessInput{
+.GuessInput {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,7 +89,7 @@ button {
   align-items: center;
   margin: 10px;
   flex-direction: row;
-  width: 50px;
+  width: 150px;
   margin-top: 10px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -68,43 +100,33 @@ button {
   max-width: 400px;
   margin: 20px auto;
   display: flex;
-  justify-content: space-between; /* מפזר את המספרים בקצוות */
-  align-items: center; /* ממרכז את האחוזים לאורך הציר האנכי */
+  justify-content: space-between;
+  align-items: center;
 }
 
 .progress-bar {
   width: 100%;
   background-color: #e0e0e0;
-  justify-content: space-between;
   display: flex;
   align-items: center;
   flex-grow: 1;
   margin: 0 10px;
-  border-radius: 5px; 
+  border-radius: 5px;
   position: relative;
   overflow: hidden;
-
 }
 
 .progress-text {
-  margin-left: auto; /* מזיז את האחוזים לימין */
-  margin-right: auto; /* מרכז את האחוזים */
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
-  width: 50px; /* הגדרה של רוחב האזור של האחוזים */
+  width: 50px;
 }
 
 mat-icon {
   font-size: 25px;
   margin-right: 10px;
   vertical-align: middle;
-}
-
-.progress-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-
 }
 
 .current-word-count,
@@ -114,60 +136,55 @@ mat-icon {
   margin: 0 10px;
 }
 
-
-.gamepoint {
-  font-size: large;
-  position: absolute;
-  top: 95PX;
-  right: 430px;
+table.mat-table {
+  width: 100%;
+  margin-bottom: 20px;
 }
 
-.hederSummery {
-  font-size: 34px;  
+th.mat-header-cell, td.mat-cell {
   text-align: center;
-  font-weight: bold;
+  font-size: 18px;
+}
+
+p {
+  font-size: 20px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+h3 {
+  text-align: center;
+  font-size: 24px;
   color: rgb(60, 60, 135);
-  background: linear-gradient(
-    to top left,
-    rgb(159, 236, 236),
-    rgb(230, 230, 147));
-  padding: 7px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  border: 2px solid #00ff44;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s, box-shadow 0.9s;
-  width: calc(80% - 100px); 
-  margin-left: 40px; 
-  margin-right: 50px; 
+  margin: 20px 0;
 }
 
 .button-group {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 80px;
 }
 
 .button-group button {
   width: auto;
-  padding: 10px 20px; /* ריווח פנימי לכפתור */
-  margin: 10px; /* ריווח חיצוני סביב הכפתור */
-  font-size: 18px; /* גודל פונט */
-  border-radius: 8px; /* עיגול הפינות של הכפתור */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* הוספת צל קל */
-  background-color: #ffffff; /* צבע רקע לכפתור */
-  transition: transform 0.3s, box-shadow 0.3s; /* הוספת מעבר חלק כאשר הכפתור נלחץ */
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 18px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .button-group button:hover {
-  background-color: #e0f7fa; /* צבע רקע כאשר מרחפים מעל הכפתור */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* צל גדול יותר כאשר מרחפים מעל הכפתור */
-  transform: scale(1.05); /* הגדלת הכפתור מעט כאשר מרחפים מעליו */
+  background-color: #e0f7fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
 }
 
 .button-group button:active {
-  background-color: #b2ebf2; /* צבע רקע כאשר הכפתור נלחץ */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* צל קטן יותר כאשר הכפתור נלחץ */
-  transform: scale(0.98); /* הקטנה קטנה של הכפתור כאשר נלחץ */
+  background-color: #b2ebf2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: scale(0.98);
 }

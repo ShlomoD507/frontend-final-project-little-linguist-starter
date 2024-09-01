@@ -1,50 +1,46 @@
 .container {
   padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto; /* מרכז את התוכן */
+  max-width: 1200px; /* קביעת רוחב מקסימלי לעמוד */
+  margin: 0 auto; /* מרכז את התוכן בעמוד */
 }
 
 .headTitle {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; /* מרווח בין הכפתור לכותרת */
   margin-bottom: 20px;
   position: relative;
 }
 
 h2 {
-  font-size: 34px;
+  font-size: 34px; /* גודל פונט אחיד */
   text-align: center;
   font-weight: bold;
   color: rgb(60, 60, 135);
   background: linear-gradient(to top left, rgb(159, 236, 236), rgb(230, 230, 147));
-  padding: 10px; /* ריווח פנימי גדול יותר */
+  padding: 10px;
   border-radius: 10px;
   margin-bottom: 20px;
   border: 2px solid #00ff44;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.9s;
-  width: auto; 
-  margin-left: auto; 
-  margin-right: auto;
-  display: inline-block;
-
+  width: 100%; /* כותרות ברוחב אחיד */
+  margin: 0 auto;
 }
 
 .exitgame {
   position: absolute;
-  top: 50%;  /* ממקם את הכפתור באמצע גובה הכותרת */
-  left: 350px;  /* מגדיר את המיקום משמאל */
-  transform: translateY(-50%);  /* ממרכז את הכפתור באופן אנכי */
+  top: 50%;  
+  left: 20px;  
+  transform: translateY(-50%); /* ממרכז את הכפתור באופן אנכי */
 }
-
 
 .app-game-points {
   font-size: large;
   position: absolute;
-  top: 50%;
-  right: 50px;
-  transform: translateY(-50%);
+  top: 100%; /* הזזה למטה */
+  right: 20px;
+  transform: translateY(-100%); /* מיקום תחת החלק הירוק */
 }
 
 p {
@@ -56,29 +52,30 @@ p {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 60px; /* הוספת רווח תחתון */
 }
 
 .button-group button {
   width: auto;
-  padding: 10px 20px; /* ריווח פנימי לכפתור */
-  margin: 10px; /* ריווח חיצוני סביב הכפתור */
-  font-size: 18px; /* גודל פונט */
-  border-radius: 8px; /* עיגול הפינות של הכפתור */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* הוספת צל קל */
-  background-color: #ffffff; /* צבע רקע לכפתור */
-  transition: transform 0.3s, box-shadow 0.3s; /* הוספת מעבר חלק כאשר הכפתור נלחץ */
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 18px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .button-group button:hover {
-  background-color: #e0f7fa; /* צבע רקע כאשר מרחפים מעל הכפתור */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* צל גדול יותר כאשר מרחפים מעל הכפתור */
-  transform: scale(1.05); /* הגדלת הכפתור מעט כאשר מרחפים מעליו */
+  background-color: #e0f7fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
 }
 
 .button-group button:active {
-  background-color: #b2ebf2; /* צבע רקע כאשר הכפתור נלחץ */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* צל קטן יותר כאשר הכפתור נלחץ */
-  transform: scale(0.98); /* הקטנה קטנה של הכפתור כאשר נלחץ */
+  background-color: #b2ebf2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: scale(0.98);
 }
 
 .progress-container {

@@ -72,21 +72,24 @@ export class SortWordsComponent implements OnInit {
 
   ngOnInit(): void {
     const selectedCateogry = this.categoriesService.get(parseInt(this.id));
-
+  
     if (selectedCateogry) {
       this.currentCategory = selectedCateogry;
       this.randomCategory = this.getRandomCategory();
-
-      const currentWords = this.getRandomWords(this.currentCategory);
-      const randomWords = this.getRandomWords(this.randomCategory);
-
+  
+      // קבלת 3 מילים מכל קטגוריה
+      const currentWords = this.getRandomWords(this.currentCategory, 3);
+      const randomWords = this.getRandomWords(this.randomCategory, 3);
+  
+      // שילוב וערבוב המילים שנבחרו משתי הקטגוריות
       this.wordPool = this.shuffleWords([...currentWords, ...randomWords]);
-
+  
       this.wordPoints = Math.floor(100 / this.wordPool.length);
     } else {
       console.error('קטגוריה נוכחית לא נמצאה.');
     }
   }
+  
 
   getRandomCategory(): Category {
     const allCategories = this.categoriesService.list();
@@ -97,8 +100,12 @@ export class SortWordsComponent implements OnInit {
     return filteredCategories[randomIndex];
   }
 
-  getRandomWords(category: Category): TranslatedWord[] {
-    return category.words.sort(() => Math.random() - 0.5);
+  getRandomWords(category: Category, count: number): TranslatedWord[] {
+    return category.words.sort(() => Math.random() - 0.5).slice(0, count);
+  }
+
+  getCorrectlyClassifiedCount(): number {
+    return this.wordPool.filter(word => this.isGuessCorrect(word.origin, word.guess)).length;
   }
 
   shuffleWords(words: TranslatedWord[]): TranslatedWord[] {
