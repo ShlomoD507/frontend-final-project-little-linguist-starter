@@ -148,6 +148,7 @@ export class SortWordsComponent implements OnInit {
     if (this.currentPoolIndex >= this.wordPool.length) {
       this.endGame = true;
     }
+    
   }
 
   calculateProgress(): number {
