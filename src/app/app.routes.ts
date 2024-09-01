@@ -7,6 +7,7 @@ import { MixdWordsComponent } from './mixd-words/mixd-words.component';
 import { ChooseYourGameComponent } from './choose-your-game/choose-your-game.component';
 import { SortWordsComponent } from './sort-words/sort-words.component';
 import { TriviaComponent } from './trivia/trivia.component';
+import { ChooseCategoryComponent } from './choose-category/choose-category.component';
 
 export const routes: Routes = [
     {path: "admin", component: CategoriesListComponent},
@@ -18,4 +19,5 @@ export const routes: Routes = [
     {path: "choose-your-game", component: ChooseYourGameComponent},
     {path: "sort-words/:id", component: SortWordsComponent},
     {path: "trivia/:id", component: TriviaComponent},
+    {path: "choose-category", component: ChooseCategoryComponent},
 ];

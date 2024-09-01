@@ -142,9 +142,7 @@ export class SortWordsComponent implements OnInit {
     }
 
     this.dialogService.submit(isCorrect);
-
     this.currentPoolIndex++;
-
     if (this.currentPoolIndex >= this.wordPool.length) {
       this.endGame = true;
     }
@@ -156,15 +154,13 @@ export class SortWordsComponent implements OnInit {
   }
 
   startNewGame(): void {
-    this.ngOnInit(); // אתחול מחדש של המשחק
+    this.ngOnInit(); 
   }
 
-  // פונקציה לפתיחת דיאלוג יציאה
   exitGame(): void {
     const dialogRef = this.dialog.open(ExitDialogComponent);
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
-        // או התנאי הנכון שגורם ליציאה מהמשחק
         this.router.navigate(['choose-your-game']);
       }
     });

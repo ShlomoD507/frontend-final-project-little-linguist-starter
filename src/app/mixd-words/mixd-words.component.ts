@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  Input,
-  ChangeDetectionStrategy,
+import {Component, OnInit,ViewChild,Input,ChangeDetectionStrategy,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CategoriesService } from './../services/categories.service';
@@ -159,12 +154,10 @@ export class MixdWordsComponent implements OnInit {
     this.endGame = false;
     this.mixWord();
   }
-
+  
   exitGame(): void {
     this.dialogService.open(ExitDialogComponent);
-
   }
-
 
   calculateProgress(): number {
     const totalWords = this.words?.length || 0;

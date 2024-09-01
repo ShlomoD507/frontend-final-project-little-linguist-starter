@@ -1,19 +1,19 @@
 .container {
   padding: 20px;
-  max-width: 1200px; /* קביעת רוחב מקסימלי לעמוד */
-  margin: 0 auto; /* מרכז את התוכן בעמוד */
+  max-width: 1200px;
+  margin: 0 auto; 
 }
 
 .headTitle {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* מרווח בין הכפתור לכותרת */
+  justify-content: space-between; 
   margin-bottom: 20px;
   position: relative;
 }
 
 h2 {
-  font-size: 34px; /* גודל פונט אחיד */
+  font-size: 34px; 
   text-align: center;
   font-weight: bold;
   color: rgb(60, 60, 135);
@@ -24,7 +24,7 @@ h2 {
   border: 2px solid #00ff44;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.9s;
-  width: 100%; /* כותרות ברוחב אחיד */
+  width: 100%; 
   margin: 0 auto;
 }
 
@@ -32,15 +32,15 @@ h2 {
   position: absolute;
   top: 50%;  
   left: 20px;  
-  transform: translateY(-50%); /* ממרכז את הכפתור באופן אנכי */
+  transform: translateY(-50%); 
 }
 
 .app-game-points {
   font-size: large;
   position: absolute;
-  top: 100%; /* הזזה למטה */
+  top: 100%; 
   right: 20px;
-  transform: translateY(-100%); /* מיקום תחת החלק הירוק */
+  transform: translateY(-100%); 
 }
 
 p {
@@ -52,7 +52,7 @@ p {
   display: flex;
   justify-content: center;
   margin-top: 20px;
-  margin-bottom: 60px; /* הוספת רווח תחתון */
+  margin-bottom: 60px; 
 }
 
 .button-group button {
