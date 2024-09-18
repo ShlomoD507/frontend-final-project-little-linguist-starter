@@ -41,7 +41,9 @@ export class ChooseCategoryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.allCategories = this.categoryService.list();
+    this.categoryService.list().then((res) => {
+      this.allCategories = res;
+    });
   }
   openDialog() {
     if (this.selectedCategory == undefined) {

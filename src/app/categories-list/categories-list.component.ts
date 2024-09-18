@@ -38,18 +38,22 @@ export class CategoriesListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.dataSource = this.categoriesService.list();
+    this.categoriesService.list().then((res) => {
+      this.dataSource = res;
+    });
   }
 
-  deleteCategory(id: number, name: string) {
+  async deleteCategory(id: string, name: string): Promise<void> {
     const dialogRef = this.dialogService.open(DeleteCategoryDialogComponent, {
       data: name,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(async (result) => {
       if (result) {
-        this.categoriesService.delete(id);
-        this.dataSource = this.categoriesService.list();
+        await this.categoriesService.delete(id);
+        this.categoriesService.list().then((res) => {
+          this.dataSource = res;
+        });
       }
     });
   }

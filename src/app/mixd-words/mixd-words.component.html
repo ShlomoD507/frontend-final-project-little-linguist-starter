@@ -1,12 +1,15 @@
-<div class="container">
+<div class="loading" *ngIf="isLoading">
+  <h1>Loading...</h1>
+</div>
+<div class="container" *ngIf="!isLoading">
   <div class="headTitle">
     <app-exit-button class="exitgame" (click)="exitGame()">exit_to_app</app-exit-button>
     <h2>Mixed Words - {{ currentCategory.name }}</h2>
-  <div class ="gamepoint">
-    <app-game-points [points]="gamePoints"></app-game-points>
+    <div class="gamepoint">
+      <app-game-points [points]="gamePoints"></app-game-points>
+    </div>
   </div>
-  </div>
-  <div *ngIf="!endGame">
+  <div *ngIf="!endGame && words.length > 0">
     <div class="word-display">
       <span class="original-word">{{ words[index].target }}</span>
       <span class="mixed-word">{{ mixedWord }}</span>
@@ -55,7 +58,7 @@
     </div>
   </div>
 </div>
-<div class="progress-container">
+<div class="progress-container" *ngIf="!isLoading">
   <div class="progress-bar">
     <span class="current-word-count">{{ index }}</span>
     <mat-progress-bar mode="determinate" [value]="calculateProgress()"></mat-progress-bar>

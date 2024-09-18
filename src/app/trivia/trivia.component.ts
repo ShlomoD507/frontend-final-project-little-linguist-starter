@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { CategoriesService } from './../services/categories.service';
 import { Category } from './../../shared/model/category';
 import { RouterModule } from '@angular/router';
@@ -7,27 +12,21 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-trivia',
   standalone: true,
-  imports: [
-    CommonModule,RouterModule,
-  ],
+  imports: [CommonModule, RouterModule],
   templateUrl: './trivia.component.html',
   styleUrl: './trivia.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
- export class TriviaComponent implements OnInit{ 
+export class TriviaComponent implements OnInit {
   @Input()
-  id=''
+  id = '';
 
   currentCategory: Category | undefined;
-  constructor(private CategoriesService:CategoriesService){}
-  
+  constructor(private CategoriesService: CategoriesService) {}
+
   ngOnInit(): void {
-      this.currentCategory = this.CategoriesService.get(parseInt(this.id));
+    this.CategoriesService.get(this.id).then((reslt) => {
+      this.currentCategory = reslt;
+    });
   }
 }
-
-
-
-
-

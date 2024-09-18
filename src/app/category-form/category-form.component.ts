@@ -29,7 +29,13 @@ import { TranslatedWord } from '../../shared/model/translated-word';
   styleUrl: './category-form.component.css',
 })
 export class CategoryFormComponent implements OnInit {
-  currentCategory = new Category(0, '', Language.English, Language.Hebrew, []);
+  currentCategory: Category = new Category(
+    '',
+    '',
+    Language.English,
+    Language.Hebrew,
+    []
+  );
   displayedColumns: string[] = ['Origin', 'Target', 'Actions'];
 
   @Input()
@@ -44,11 +50,11 @@ export class CategoryFormComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.id) {
-      const categoryData = this.categoriesService.get(parseInt(this.id));
-
-      if (categoryData) {
-        this.currentCategory = categoryData;
-      }
+      this.categoriesService.get(this.id).then((categoryFromService) => {
+        if (categoryFromService) {
+          this.currentCategory = categoryFromService;
+        }
+      });
     }
   }
 

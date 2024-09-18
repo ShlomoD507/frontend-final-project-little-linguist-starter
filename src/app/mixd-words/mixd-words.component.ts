@@ -1,4 +1,9 @@
-import {Component, OnInit,ViewChild,Input,ChangeDetectionStrategy,
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Input,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CategoriesService } from './../services/categories.service';
@@ -44,7 +49,7 @@ import { Router } from '@angular/router';
   ],
   templateUrl: './mixd-words.component.html',
   styleUrl: './mixd-words.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class MixdWordsComponent implements OnInit {
   @Input() id: string = '';
@@ -59,9 +64,10 @@ export class MixdWordsComponent implements OnInit {
   gameDuration: number = 0;
   displayTimeLeft: string = '';
   displayedColumns: string[] = ['hebrew', 'english', 'isCorrect'];
+  isLoading: boolean = true;
 
   currentCategory: Category = new Category(
-    1,
+    '',
     'fake-category',
     Language.English,
     Language.English,
@@ -78,27 +84,35 @@ export class MixdWordsComponent implements OnInit {
     this.router.navigate(['choose-your-game']);
   }
 
-  ngOnInit(): void {
-    const category = this.categoriesService.get(parseInt(this.id));
-    if (category) {
-      this.currentCategory = category;
-      this.words = [...this.currentCategory.words].sort(
-        () => Math.random() - 0.5
-      );
-      this.successPoints = Math.floor(100 / this.currentCategory.words.length);
-      this.startNewGame();
-    } else {
-      console.error('Category not found.');
-    }
+  async ngOnInit(): Promise<void> {
+    this.isLoading = true;
+    this.categoriesService.get(this.id).then((category) => {
+      if (category) {
+        this.currentCategory = category;
+        this.words = [...this.currentCategory.words].sort(
+          () => Math.random() - 0.5
+        );
+        this.successPoints = Math.floor(
+          100 / this.currentCategory.words.length
+        );
+        this.startNewGame();
+      } else {
+        console.error('Category not found.');
+      }
+      this.isLoading = false;
+    });
   }
 
   mixWord(): void {
     console.log('mixing word' + this.index);
     if (this.words && this.index < this.words.length) {
-      this.mixedWord = [...this.words[this.index].origin]
-        .sort(() => Math.random() - 0.5)
-        .join(' ')
-        .toUpperCase();
+      let tempMix = this.words[this.index].origin.toUpperCase();
+      while (tempMix === this.words[this.index].origin.toUpperCase()) {
+        tempMix = [...this.words[this.index].origin]
+          .sort(() => Math.random() - 0.5)
+          .join('');
+      }
+      this.mixedWord = [...tempMix].join(' ').toUpperCase();
     }
   }
 
@@ -154,7 +168,7 @@ export class MixdWordsComponent implements OnInit {
     this.endGame = false;
     this.mixWord();
   }
-  
+
   exitGame(): void {
     this.dialogService.open(ExitDialogComponent);
   }
