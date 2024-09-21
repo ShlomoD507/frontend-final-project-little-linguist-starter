@@ -58,6 +58,13 @@
     </div>
   </div>
 </div>
+
+<div class="timer-container">
+  <mat-icon>alarm</mat-icon>
+  <app-timer [duration]="gameDuration"></app-timer>
+</div>
+
+
 <div class="progress-container" *ngIf="!isLoading">
   <div class="progress-bar">
     <span class="current-word-count">{{ index }}</span>
@@ -66,3 +73,5 @@
     <div class="progress-text">{{ calculateProgress() | number : '1.0-0' }}%</div>
   </div>
 </div>
+
+
