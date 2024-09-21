@@ -1,3 +1,22 @@
-<p>Dashboard</p><br>
-<p>You're Learning:</p>
-
+<div class="dashboard-container">
+    <h2>Your learning:</h2>
+    <div class="dashboard-grid">
+      <mat-card class="dashboard-card" *ngFor="let card of cards">
+        <mat-card-content>
+          <h3>{{ card.title }}</h3>
+          <p>{{ card.value }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  
+    <!-- הצגת אתגר חודשי -->
+    <div>
+      <p>{{ monthlyChallengeMessage }}</p>
+    </div>
+  
+    <!-- הצגת ימי משחק רצופים -->
+    <div>
+      <p>Days Strike: {{ cards[4].value }}</p>
+    </div>
+  </div>
+  

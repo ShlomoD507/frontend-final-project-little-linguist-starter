@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  Input,
-  ChangeDetectionStrategy,
-} from '@angular/core';
+import { Component, OnInit, ViewChild, Input,ChangeDetectionStrategy} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CategoriesService } from './../services/categories.service';
 import { Category } from './../../shared/model/category';
@@ -27,6 +21,8 @@ import { Language } from '../../shared/model/language';
 import { GamePointsComponent } from '../game-points/game-points.component';
 import { MatTableModule } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { GameResult } from '../../shared/model/game-result';
+import { GameResultService } from '../services/game-result.service';
 
 @Component({
   selector: 'app-mixd-words',
@@ -78,7 +74,9 @@ export class MixdWordsComponent implements OnInit {
     private categoriesService: CategoriesService,
     private dialogService: MatDialog,
     private gamePlayedService: GamePlayedService,
+    private gameResultService: GameResultService,
     private router: Router
+
   ) {}
   navigateToChooseGame() {
     this.router.navigate(['choose-your-game']);
@@ -150,6 +148,21 @@ export class MixdWordsComponent implements OnInit {
       };
 
       this.gamePlayedService.saveGame(game);
+
+      const gameResult = new GameResult(
+        this.id,                                // id קטגוריה
+        `${this.id}-${new Date().getTime()}`,   // מזהה ייחודי למשחק
+        new Date(),                             // תאריך המשחק
+        this.gamePoints                         // כמות נקודות
+      );
+
+      this.gameResultService.addGameResult(gameResult).then(() => {
+        console.log('Game result saved successfully');
+      }).catch(error => {
+        console.error('Error saving game result:', error);
+      });
+
+
     } else {
       const dataToSend = new WinLoseData();
       dataToSend.isSuccess = isSuccess;
@@ -180,3 +193,5 @@ export class MixdWordsComponent implements OnInit {
     return Math.max(guessedWordsRatio, categoryProgressRatio) * 100;
   }
 }
+
+

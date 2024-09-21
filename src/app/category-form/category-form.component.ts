@@ -78,7 +78,6 @@ export class CategoryFormComponent implements OnInit {
     } else {
       this.categoriesService.add(this.currentCategory);
     }
-
     this.router.navigate(['choose-your-game']);
   }
 }

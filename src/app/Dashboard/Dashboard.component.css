@@ -5,3 +5,73 @@ p{
   color: rgb(60, 60, 135);
   font-weight: bold;
 }
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  justify-content: center;
+}
+
+.dashboard-card {
+  text-align: center;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+mat-card h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+mat-card p {
+  font-size: 48px;
+  font-weight: bold;
+}
+.dashboard-container {
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.dashboard-card {
+  width: 100%;
+  max-width: 200px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+mat-card h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+mat-card p {
+  margin: 10px 0 0;
+  font-size: 32px;
+  font-weight: bold;
+}

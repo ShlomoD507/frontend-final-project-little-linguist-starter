@@ -24,11 +24,26 @@ export class GameInfoService {
       'choose every words translation from a list of 4 options',
       'trivia'
     ),
-  ];
+  new GameProfile(
+    4,
+    'Memory Game',
+    'Match the words with their translations to win',
+    'memory-game' // השם של הנתיב של המשחק
+  ),
+];
 
-  list(): GameProfile[] {
-    return this.allgames;
-  }
+list(): GameProfile[] {
+  return this.allgames;
+}
 
   constructor() {}
 }
+
+
+
+
+
+
+
+
+
