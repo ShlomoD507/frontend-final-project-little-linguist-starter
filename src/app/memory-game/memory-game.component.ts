@@ -16,11 +16,10 @@ import { CommonModule } from '@angular/common'; // ייבוא CommonModule עב�
   ],
   templateUrl: './memory-game.component.html',
   styleUrls: ['./memory-game.component.css'],
-
 })
 export class MemoryGameComponent implements OnInit {
   words: TranslatedWord[] = []; // מילים והפירוש שלהן
-  cards: { word: string, flipped: boolean, matched: boolean }[] = [];
+  cards: { word: string, flipped: boolean, matched: boolean, direction: string }[] = [];
   firstCardIndex: number | null = null;
   secondCardIndex: number | null = null;
   attempts: number = 0;
@@ -45,13 +44,29 @@ export class MemoryGameComponent implements OnInit {
     }
   }
 
-  // ערבוב הכרטיסים
-  shuffleCards(cards: TranslatedWord[]): { word: string, flipped: boolean, matched: boolean }[] {
+  // ערבוב הכרטיסים והוספת המאפיין direction
+  shuffleCards(cards: TranslatedWord[]): { word: string, flipped: boolean, matched: boolean, direction: string }[] {
     const shuffled = cards
-      .map((word) => ({ word: word.origin, flipped: false, matched: false }))
-      .concat(cards.map((word) => ({ word: word.target, flipped: false, matched: false })))
+      .map((word) => ({ 
+        word: word.origin, 
+        flipped: false, 
+        matched: false, 
+        direction: this.getTextDirection(word.origin) // קביעת כיוון הטקסט בהתאם לשפה
+      }))
+      .concat(cards.map((word) => ({ 
+        word: word.target, 
+        flipped: false, 
+        matched: false, 
+        direction: this.getTextDirection(word.target) // קביעת כיוון הטקסט בהתאם לשפה
+      })))
       .sort(() => Math.random() - 0.5); // ערבוב הכרטיסים
     return shuffled;
+  }
+
+  // פונקציה להחזרת כיוון טקסט בהתאם לתוכן
+  getTextDirection(text: string): string {
+    const hebrewCharRange = /[\u0590-\u05FF]/;
+    return hebrewCharRange.test(text) ? 'rtl' : 'ltr';
   }
 
   // נגיעה בכרטיס
@@ -80,6 +95,8 @@ export class MemoryGameComponent implements OnInit {
       // התאמה
       firstCard.matched = true;
       secondCard.matched = true;
+      firstCard.flipped = true;
+      secondCard.flipped = true; // השאר הכרטיסים הפוכים כשיש התאמה
     } else {
       // אין התאמה
       firstCard.flipped = false;

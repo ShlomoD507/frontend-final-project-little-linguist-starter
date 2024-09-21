@@ -1,33 +1,99 @@
 .memory-game {
-    text-align: center;
-    font-family: Arial, sans-serif;
-  }
-  
-  .cards-container {
-    display: grid;
-    grid-template-columns: repeat(4, 150px);
-    grid-gap: 20px;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .card {
-    cursor: pointer;
-    transition: transform 0.5s;
-  }
-  
-  .card.flipped, .card.matched {
-    background-color: #28a745; /* שינוי צבע בהצלחה */
-    transform: rotateY(180deg);
-  }
-  
-  .question-mark {
-    font-size: 36px;
-    font-weight: bold;
-  }
-  
-  .congratulations-card {
-    margin-top: 20px;
-    text-align: center;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: aliceblue;
+  border: 2px solid #00ff11;
+  border-radius: 8px;
+  padding: 20px;
+  background: linear-gradient(to top left, rgb(159, 236, 236), rgb(230, 230, 147));
+}
+
+.memory-game h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.memory-game .cards-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 15px;
+  justify-items: center;
+  margin: 20px 0;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
+}
+
+.memory-game .card {
+  width: 120px;
+  height: 120px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.memory-game .card.flipped, .memory-game .card.matched {
+  background-color: #4caf50; /* צבע ירוק לכרטיסים שנמצאה להם התאמה */
+  color: white;
+  transform: scale(1.05);
+}
+
+.memory-game .card.matched {
+  pointer-events: none; /* למנוע לחיצה נוספת על כרטיסים שנמצאה להם התאמה */
+}
+
+.memory-game .question-mark {
+  font-size: 50px;
+  color: #424242;
+}
+
+.memory-game .congratulations-card {
+  background-color: #ffeb3b;
+  color: #333;
+  text-align: center;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.memory-game .button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.memory-game mat-card-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* טיפול בטקסט בעברית */
+.memory-game .card[dir="rtl"] {
+  direction: rtl;
+}
+
+/* כרטיס כשהעכבר מעליו */
+.memory-game .card:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.1);
+}
+
+.memory-game .card:focus {
+  outline: 2px solid #2196f3;
+}
