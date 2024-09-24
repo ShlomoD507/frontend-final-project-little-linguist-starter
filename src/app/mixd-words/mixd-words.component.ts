@@ -12,8 +12,6 @@ import { TranslatedWord } from '../../shared/model/translated-word';
 import { TimerComponent } from '../timer/timer.component';
 import { WinLoseComponent, WinLoseData } from '../win-lose/win-lose.component';
 import { ExitDialogComponent } from '../exit-dialog/exit-dialog.component';
-import { GamePlayedService } from './../services/game-played.service';
-import { GamePlayed } from '../../shared/model/game-played.model';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -29,6 +27,7 @@ import { MatTableModule } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { GameResult } from '../../shared/model/game-result';
 import { GameResultService } from '../services/game-result.service';
+import { GameIdEnum } from '../services/GameInfo.service';
 
 @Component({
   selector: 'app-mixd-words',
@@ -79,7 +78,6 @@ export class MixdWordsComponent implements OnInit {
   constructor(
     private categoriesService: CategoriesService,
     private dialogService: MatDialog,
-    private gamePlayedService: GamePlayedService,
     private gameResultService: GameResultService,
     private router: Router
   ) {}
@@ -149,21 +147,13 @@ export class MixdWordsComponent implements OnInit {
         this.gamePoints = 100;
       }
 
-      const game: GamePlayed = {
-        date: new Date(),
-        idCategory: this.id,
-        numOfPoints: this.gamePoints,
-        secondLeftInGame: this.timerComponent.getTimeLeft(),
-        secondsPlayed: this.gameDuration - this.timerComponent.getTimeLeft(),
-      };
-
-      this.gamePlayedService.saveGame(game);
-
       const gameResult = new GameResult(
         this.id, // id קטגוריה
-        `${this.id}-${new Date().getTime()}`, // מזהה ייחודי למשחק
+        GameIdEnum.MixedWords.toString(), // מזהה של המשחק
         new Date(), // תאריך המשחק
-        this.gamePoints // כמות נקודות
+        this.gamePoints, // כמות נקודות
+        this.timerComponent.getTimeLeft(),
+        this.gameDuration - this.timerComponent.getTimeLeft(),
       );
 
       this.gameResultService
