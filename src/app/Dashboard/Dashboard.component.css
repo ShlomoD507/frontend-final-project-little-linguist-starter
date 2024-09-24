@@ -75,3 +75,9 @@ mat-card p {
   font-size: 32px;
   font-weight: bold;
 }
+
+.big-text {
+  margin: 10px 0 0;
+  font-size: 32px;
+  font-weight: bold;
+}

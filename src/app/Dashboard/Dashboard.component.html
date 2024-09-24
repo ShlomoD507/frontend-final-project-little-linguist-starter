@@ -10,13 +10,20 @@
     </div>
   
     <!-- הצגת אתגר חודשי -->
-    <div>
-      <p>{{ monthlyChallengeMessage }}</p>
+    <div *ngIf="monthlyChallengeGamesNeeded > 0">
+      <p>You need to play</p>
+      <p class="big-text">{{ monthlyChallengeGamesNeeded }}</p>
+      <p>more games to complete the monthly challenge</p>
+
     </div>
-  
-    <!-- הצגת ימי משחק רצופים -->
-    <div>
-      <p>Days Strike: {{ cards[4].value }}</p>
+
+    <div *ngIf="monthlyChallengeGamesNeeded <= 0">
+      <p class="big-text">Congratulations! You've completed the monthly challenge!</p>
     </div>
+     
+    <br/>
+    <br/>
+    <br/>
+    <br/>
   </div>
   

@@ -20,6 +20,8 @@ export class DashboardComponent implements OnInit {
     { title: 'Total Games', value: 0 },
     { title: 'Total Points', value: 0 },
     { title: 'Categories learnt', value: 0 },
+    { title: 'Categories NOT learnt', value: 0 },
+    { title: 'Categories learnt precent', value: 0 },
     { title: 'Perfect games', value: '0%' },
     { title: 'Days strike', value: 0 },
     { title: 'Games this month', value: 0 },
@@ -27,7 +29,7 @@ export class DashboardComponent implements OnInit {
   ];
 
   gameResults: GameResult[] = [];
-  monthlyChallengeMessage: string = '';
+  monthlyChallengeGamesNeeded: number = 20;
 
   constructor(
     private gameResultService: GameResultService,
@@ -45,13 +47,26 @@ export class DashboardComponent implements OnInit {
   async loadStats(): Promise<void> {
     const categories = await this.categoriesService.list();
 
+
+    let categoriesLernt = 0;
+    categories.forEach(c => {
+      if (this.gameResults.filter(gr => gr.idCategory == c.id).length > 0){
+        categoriesLernt++;
+      }
+    });
+
+    const monthlyGames = this.calculateMonthlyGames(this.gameResults); // משחקים ששוחקו החודש
+    this.monthlyChallengeGamesNeeded = this.calculateMonthlyChallenge(this.gameResults);
+
     this.cards[0].value = this.gameResults.length; // מספר משחקים
     this.cards[1].value = this.calculateTotalPoints(this.gameResults); // כמות נקודות
-    this.cards[2].value = categories.length; // קטגוריות שנלמדו
-    this.cards[3].value = this.calculatePerfectGames(this.gameResults) + '%'; // אחוזי הצלחה מושלמת
-    this.cards[4].value = this.calculateDaysStrike(); // ימים ברצף
-    this.cards[5].value = this.calculateMonthlyGames(this.gameResults); // משחקים ששוחקו החודש
-    this.cards[6].value = this.findHighestScoreGame(this.gameResults); // שם המשחק עם הניקוד הגבוה ביותר
+    this.cards[2].value = categoriesLernt; // קטגוריות שנלמדו
+    this.cards[3].value = categories.length - categoriesLernt;
+    this.cards[4].value = Math.round((categoriesLernt / categories.length) * 100) + '%';
+    this.cards[5].value = this.calculatePerfectGames(this.gameResults) + '%'; // אחוזי הצלחה מושלמת
+    this.cards[6].value = this.calculateDaysStrike(); // ימים ברצף
+    this.cards[7].value = monthlyGames;
+    this.cards[8].value = this.findHighestScoreGame(this.gameResults); // שם המשחק עם הניקוד הגבוה ביותר
   }
 
   calculateTotalPoints(games: GameResult[]): number {
@@ -103,30 +118,20 @@ export class DashboardComponent implements OnInit {
 
     return gameProfile ? gameProfile.GameName : 'Unknown game';
   }
+
   // חישוב אתגר חודשי
-  calculateMonthlyChallenge(games: GameResult[]): {
-    playedThisMonth: number;
-    remainingGames: number;
-    message: string;
-  } {
-    const currentMonth = new Date().getMonth();
-    const gamesThisMonth = games.filter(
-      (game) => new Date(game.date).getMonth() === currentMonth
-    ).length;
+  calculateMonthlyChallenge(games: GameResult[]): number
+  {
+    const gamesThisMonth = this.calculateMonthlyGames(games);
     const remainingGames = 20 - gamesThisMonth;
 
-    let message;
-    if (remainingGames > 0) {
-      message = `You need to play ${remainingGames} more games to complete the monthly challenge!`;
-    } else {
-      message = `Congratulations! You've completed the monthly challenge!`;
-    }
+    return remainingGames;
 
-    return {
-      playedThisMonth: gamesThisMonth,
-      remainingGames: remainingGames > 0 ? remainingGames : 0,
-      message,
-    };
+    // if (remainingGames > 0) {
+    //   message = `You need to play ${remainingGames} more games to complete the monthly challenge!`;
+    // } else {
+    //   message = `Congratulations! You've completed the monthly challenge!`;
+    // }
   }
 
   // טעינת תוצאות משחקים
