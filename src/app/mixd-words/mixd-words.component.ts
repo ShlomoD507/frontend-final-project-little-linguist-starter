@@ -53,6 +53,7 @@ import { GameIdEnum } from '../services/GameInfo.service';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class MixdWordsComponent implements OnInit {
+
   @Input() id: string = '';
   @ViewChild(TimerComponent) timerComponent!: TimerComponent;
   words: TranslatedWord[] = [];
@@ -151,21 +152,7 @@ export class MixdWordsComponent implements OnInit {
         this.gamePoints = 100;
       }
 
-      const gameResult = new GameResult(
-        this.id, // id קטגוריה
-        GameIdEnum.MixedWords.toString(), // מזהה של המשחק
-        new Date(), // תאריך המשחק
-        this.gamePoints, // כמות נקודות
-      );
-
-      this.gameResultService
-        .addGameResult(gameResult)
-        .then(() => {
-          console.log('Game result saved successfully');
-        })
-        .catch((error) => {
-          console.error('Error saving game result:', error);
-        });
+      this.sendStatistics();
     } else {
       const dataToSend = new WinLoseData();
       dataToSend.isSuccess = isSuccess;
@@ -193,4 +180,30 @@ export class MixdWordsComponent implements OnInit {
     const totalWords = this.words?.length || 0;
     return Math.floor((this.index / totalWords) * 100);
   }
+
+  onTimerDone() {
+    this.endGame = true;
+    this.sendStatistics();
+    alert("time is up. good luck next time");
+  }
+
+  sendStatistics() {
+    const gameResult = new GameResult(
+      this.id, // id קטגוריה
+      GameIdEnum.MixedWords.toString(), // מזהה של המשחק
+      new Date(), // תאריך המשחק
+      this.gamePoints, // כמות נקודות
+    );
+  
+    this.gameResultService
+      .addGameResult(gameResult)
+      .then(() => {
+        console.log('Game result saved successfully');
+      })
+      .catch((error) => {
+        console.error('Error saving game result:', error);
+      });
+  }
+  
+  
 }

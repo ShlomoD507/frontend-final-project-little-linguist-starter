@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CommonModule,  } from '@angular/common';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-timer',
@@ -14,6 +14,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class TimerComponent {
+  @Output timerDone = new EventEmitter<void>();
   public timeForGame: number = 0;
   public secondsLeft: number = 0;
   public timerInterval: ReturnType<typeof setInterval> | null = null;
@@ -24,7 +25,8 @@ export class TimerComponent {
     //  every seconds, increase the timer
     this.timerInterval = setInterval(() => {
       this.secondsLeft--;
-      if (this.secondsLeft == 0) {
+      if (this.secondsLeft <= 0) {
+        this.timerDone.emit()
         this.stopTimer();
       }
     }, 1000);
@@ -44,6 +46,6 @@ export class TimerComponent {
     // convert seconds to MM:SS
     const minutes = Math.floor(this.secondsLeft / 60);
     const remainedSeconds = this.secondsLeft % 60;
-    return minutes + ':' + remainedSeconds;
+    return minutes + ':' + (remainedSeconds < 10 ? "0" + remainedSeconds : remainedSeconds);
   }
 }
