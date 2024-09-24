@@ -53,7 +53,6 @@ import { GameIdEnum } from '../services/GameInfo.service';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class MixdWordsComponent implements OnInit {
-
   @Input() id: string = '';
   @ViewChild(TimerComponent) timerComponent!: TimerComponent;
   words: TranslatedWord[] = [];
@@ -101,7 +100,7 @@ export class MixdWordsComponent implements OnInit {
       } else {
         console.error('Category not found.');
       }
-      
+
       // this game is limited to 4 minutes
       this.timerComponent.startTimer(240);
 
@@ -184,7 +183,7 @@ export class MixdWordsComponent implements OnInit {
   onTimerDone() {
     this.endGame = true;
     this.sendStatistics();
-    alert("time is up. good luck next time");
+    alert('time is up. good luck next time');
   }
 
   sendStatistics() {
@@ -192,9 +191,9 @@ export class MixdWordsComponent implements OnInit {
       this.id, // id קטגוריה
       GameIdEnum.MixedWords.toString(), // מזהה של המשחק
       new Date(), // תאריך המשחק
-      this.gamePoints, // כמות נקודות
+      this.gamePoints // כמות נקודות
     );
-  
+
     this.gameResultService
       .addGameResult(gameResult)
       .then(() => {
@@ -204,6 +203,4 @@ export class MixdWordsComponent implements OnInit {
         console.error('Error saving game result:', error);
       });
   }
-  
-  
 }
