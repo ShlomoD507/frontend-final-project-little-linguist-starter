@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, Input,ChangeDetectionStrategy} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Input,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CategoriesService } from './../services/categories.service';
 import { Category } from './../../shared/model/category';
@@ -76,7 +82,6 @@ export class MixdWordsComponent implements OnInit {
     private gamePlayedService: GamePlayedService,
     private gameResultService: GameResultService,
     private router: Router
-
   ) {}
   navigateToChooseGame() {
     this.router.navigate(['choose-your-game']);
@@ -139,6 +144,11 @@ export class MixdWordsComponent implements OnInit {
 
     this.index++;
     if (this.endGame) {
+      // if user got the maximum points
+      if (this.gamePoints === this.successPoints * this.words.length) {
+        this.gamePoints = 100;
+      }
+
       const game: GamePlayed = {
         date: new Date(),
         idCategory: this.id,
@@ -150,19 +160,20 @@ export class MixdWordsComponent implements OnInit {
       this.gamePlayedService.saveGame(game);
 
       const gameResult = new GameResult(
-        this.id,                                // id קטגוריה
-        `${this.id}-${new Date().getTime()}`,   // מזהה ייחודי למשחק
-        new Date(),                             // תאריך המשחק
-        this.gamePoints                         // כמות נקודות
+        this.id, // id קטגוריה
+        `${this.id}-${new Date().getTime()}`, // מזהה ייחודי למשחק
+        new Date(), // תאריך המשחק
+        this.gamePoints // כמות נקודות
       );
 
-      this.gameResultService.addGameResult(gameResult).then(() => {
-        console.log('Game result saved successfully');
-      }).catch(error => {
-        console.error('Error saving game result:', error);
-      });
-
-
+      this.gameResultService
+        .addGameResult(gameResult)
+        .then(() => {
+          console.log('Game result saved successfully');
+        })
+        .catch((error) => {
+          console.error('Error saving game result:', error);
+        });
     } else {
       const dataToSend = new WinLoseData();
       dataToSend.isSuccess = isSuccess;
@@ -188,10 +199,6 @@ export class MixdWordsComponent implements OnInit {
 
   calculateProgress(): number {
     const totalWords = this.words?.length || 0;
-    const guessedWordsRatio = this.numSuccess / totalWords;
-    const categoryProgressRatio = this.index / totalWords;
-    return Math.max(guessedWordsRatio, categoryProgressRatio) * 100;
+    return Math.floor((this.index / totalWords) * 100);
   }
 }
-
-

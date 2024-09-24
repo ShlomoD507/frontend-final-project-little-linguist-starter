@@ -148,15 +148,22 @@ export class SortWordsComponent implements OnInit {
     this.currentPoolIndex++;
     if (this.currentPoolIndex >= this.wordPool.length) {
       this.endGame = true;
+      // if user got the maximum points
+      if (this.userPoints === this.wordPoints * this.wordPool.length) {
+        this.userPoints = 100;
+      }
     }
   }
 
   calculateProgress(): number {
-    return (this.currentPoolIndex / this.wordPool.length) * 100;
+    return Math.floor((this.currentPoolIndex / this.wordPool.length) * 100);
   }
 
   startNewGame(): void {
-    this.ngOnInit();
+    this.currentPoolIndex = 0; // אתחול המיקום הנוכחי בבריכת המילים
+    this.userPoints = 0; // אתחול הנקודות של המשתמש
+    this.endGame = false; // לוודא שהמשחק לא מסומן כסיים
+    this.ngOnInit(); // קריאה מחודשת ל-ngOnInit כדי לאתחל את הקטגוריות והמילים מחדש
   }
 
   exitGame(): void {

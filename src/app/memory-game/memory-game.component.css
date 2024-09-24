@@ -61,7 +61,7 @@
 }
 
 .memory-game .congratulations-card {
-  background-color: #ffeb3b;
+  background-color: #65ff3b;
   color: #333;
   text-align: center;
   padding: 20px;
@@ -80,7 +80,7 @@
   justify-content: center;
   align-items: center;
   font-size: 24px;
-  font-weight: bold;
+  font-weight:lighter;
 }
 
 /* טיפול בטקסט בעברית */
@@ -90,7 +90,7 @@
 
 /* כרטיס כשהעכבר מעליו */
 .memory-game .card:hover {
-  background-color: #e0e0e0;
+  background-color: #2196f3;
   transform: scale(1.1);
 }
 

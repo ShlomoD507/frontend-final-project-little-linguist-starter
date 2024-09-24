@@ -54,7 +54,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     <div class="button-group">
-      <button mat-stroked-button (click)="navigateToChooseGame()">New Game</button>
+      <button mat-stroked-button (click)="startNewGame()">Reset Game</button>
     </div>
   </div>
 </div>
@@ -73,5 +73,6 @@
     <div class="progress-text">{{ calculateProgress() | number : '1.0-0' }}%</div>
   </div>
 </div>
+
 
 
