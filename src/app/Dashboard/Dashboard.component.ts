@@ -89,14 +89,16 @@ export class DashboardComponent implements OnInit {
   }
 
   findHighestScoreGame(games: GameResult[]): string {
-    if (games.length === 0) return 'No games played';
+    if (games.length === 0) {
+      return 'No games played';
+    }
 
     const highestScoreGame = games.reduce((prev, current) =>
       prev.points > current.points ? prev : current
     );
 
     const gameProfile = this.gameInfoService.list().find(
-      (game) => game.GameId === Number(highestScoreGame.idCategory) // המרת idCategory למספר
+      (game) => game.GameId === Number(highestScoreGame.gameId) // המרה למספר
     );
 
     return gameProfile ? gameProfile.GameName : 'Unknown game';
