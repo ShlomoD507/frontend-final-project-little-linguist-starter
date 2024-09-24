@@ -100,6 +100,10 @@ export class MixdWordsComponent implements OnInit {
       } else {
         console.error('Category not found.');
       }
+      
+      // this game is limited to 4 minutes
+      this.timerComponent.startTimer(240);
+
       this.isLoading = false;
     });
   }
@@ -152,8 +156,6 @@ export class MixdWordsComponent implements OnInit {
         GameIdEnum.MixedWords.toString(), // מזהה של המשחק
         new Date(), // תאריך המשחק
         this.gamePoints, // כמות נקודות
-        this.timerComponent.getTimeLeft(),
-        this.gameDuration - this.timerComponent.getTimeLeft(),
       );
 
       this.gameResultService

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from './../../shared/model/category';
 import { CategoriesService } from './../services/categories.service';
@@ -18,6 +18,9 @@ import { RouterModule } from '@angular/router';
 import { ExitButtonComponent } from '../exit-button/exit-button.component';
 import { GamePointsComponent } from '../game-points/game-points.component';
 import { Language } from '../../shared/model/language';
+import { GameResult } from '../../shared/model/game-result';
+import { GameIdEnum } from '../services/GameInfo.service';
+import { GameResultService } from '../services/game-result.service';
 
 @Component({
   selector: 'app-sort-words',
@@ -36,7 +39,7 @@ import { Language } from '../../shared/model/language';
     NgIf,
     GamePointsComponent,
     MatTableModule,
-  ],
+],
   templateUrl: './sort-words.component.html',
   styleUrl: './sort-words.component.css',
 })
@@ -49,12 +52,14 @@ export class SortWordsComponent implements OnInit {
   userPoints: number = 0;
   wordPoints: number = 0;
   endGame: boolean = false;
+  isLoading: boolean = false;
 
   constructor(
     private categoriesService: CategoriesService,
     private dialogService: SortWordsDialogService,
     private dialog: MatDialog, // הוספת MatDialog לשימוש ב-Exit Dialog
-    private router: Router
+    private router: Router,
+    private gameResultService: GameResultService
   ) {
     this.currentCategory = new Category(
       '',
@@ -71,6 +76,7 @@ export class SortWordsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.categoriesService.get(this.id).then((selectedCateogry) => {
       if (selectedCateogry) {
         this.currentCategory = selectedCateogry;
@@ -84,6 +90,9 @@ export class SortWordsComponent implements OnInit {
           this.wordPool = this.shuffleWords([...currentWords, ...randomWords]);
 
           this.wordPoints = Math.floor(100 / this.wordPool.length);
+
+          this.isLoading = false;
+          
         });
       } else {
         console.error('קטגוריה נוכחית לא נמצאה.');
@@ -148,6 +157,23 @@ export class SortWordsComponent implements OnInit {
     this.currentPoolIndex++;
     if (this.currentPoolIndex >= this.wordPool.length) {
       this.endGame = true;
+
+      const gameResult = new GameResult(
+        this.id, // id קטגוריה
+        GameIdEnum.SortWords.toString(), // מזהה של המשחק
+        new Date(), // תאריך המשחק
+        this.userPoints, // כמות נקודות
+      );
+
+      this.gameResultService
+        .addGameResult(gameResult)
+        .then(() => {
+          console.log('Game result saved successfully');
+        })
+        .catch((error) => {
+          console.error('Error saving game result:', error);
+        });
+        
       // if user got the maximum points
       if (this.userPoints === this.wordPoints * this.wordPool.length) {
         this.userPoints = 100;

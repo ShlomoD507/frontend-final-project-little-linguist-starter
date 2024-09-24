@@ -5,7 +5,7 @@
     <app-game-points [points]="userPoints" class="app-game-points"></app-game-points>
   </div>
   
-  <div *ngIf="!endGame">
+  <div *ngIf="!isLoading && !endGame">
     <p>Is the word <b>{{ wordPool[currentPoolIndex].origin }}</b> part of the <b>{{ currentCategory.name }}</b> category?</p>
     <div class="button-group">
       <button mat-stroked-button color="primary" (click)="onGuess(true)">Yes</button>
@@ -48,4 +48,5 @@
       <button mat-stroked-button (click)="startNewGame()">Reset Game</button>
     </div>
   </div>
+
 </div>

@@ -28,12 +28,12 @@
   </div>
 
   <!-- הודעת ניצחון כשכל הכרטיסים נמצאו -->
-  <mat-card *ngIf="isGameWon()" class="congratulations-card">
+  <mat-card *ngIf="isGameWon" class="congratulations-card">
     <mat-card-content>
       Congratulations! You've matched all the cards! 
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="resetGame()">Play Again</button>
+      <button mat-raised-button color="primary" (click)="loadWords()">Play Again</button>
     </mat-card-actions>
   </mat-card>
 </div>

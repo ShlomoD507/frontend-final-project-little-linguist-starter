@@ -1,52 +1,48 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {  EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Input} from '@angular/core';
 
 @Component({
   selector: 'app-timer',
   standalone: true,
-  imports: [
-    CommonModule,
-  ],
+  imports: [CommonModule],
   templateUrl: './timer.component.html',
   styles: `
     :host {
       display: block;
     }
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
 })
+export class TimerComponent  {
+  public timeForGame: number = 0;
+  public secondsLeft: number = 0;
+  public timerInterval : any;
 
-export class TimerComponent implements OnInit, OnDestroy {
-  @Input() duration: number = 0; 
-  @Output() timeUp = new EventEmitter<void>(); 
-  @Output() reportTimeLeft = new EventEmitter<number>(); 
-
-  timeLeft: number = 0; 
-  private intervalId: number | undefined; 
-
-  ngOnInit(): void {
-    this.startTimer(); 
-  }
-
-  startTimer() {
-    this.timeLeft = this.duration;
-    this.intervalId = window.setInterval(() => {
-      if (this.timeLeft > 0) {
-        this.timeLeft--;
-        this.reportTimeLeft.emit(this.timeLeft);
-      } else {
-        this.timeUp.emit();
-        clearInterval(this.intervalId);
+  startTimer(secondsLeft: number) {
+    this.timeForGame = secondsLeft;
+    this.secondsLeft =  secondsLeft;
+    //  every seconds, increase the timer
+    this.timerInterval = setInterval(() => {
+      this.secondsLeft--;
+      if (this.secondsLeft == 0){
+        this.stopTimer();
       }
-    }, 1000); 
+    }, 1000);
   }
 
-  getTimeLeft(): number {
-    return this.timeLeft; 
+  getSecondsPlayed() : number{
+    return this.timeForGame - this.secondsLeft;
   }
 
-  ngOnDestroy(): void {
-    clearInterval(this.intervalId); 
+  stopTimer(){
+    clearInterval(this.timerInterval);
+  }
+
+  get convertToMMSS() : string{
+    // convert seconds to MM:SS
+    const minutes = Math.floor(this.secondsLeft / 60);
+    const remainedSeconds = this.secondsLeft % 60;
+    return minutes + ":" + remainedSeconds;
   }
 }

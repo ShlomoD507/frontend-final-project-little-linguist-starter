@@ -1,6 +1,7 @@
 <div class="loading" *ngIf="isLoading">
   <h1>Loading...</h1>
 </div>
+
 <div class="container" *ngIf="!isLoading">
   <div class="headTitle">
     <app-exit-button class="exitgame" (click)="exitGame()">exit_to_app</app-exit-button>
@@ -61,7 +62,7 @@
 
 <div class="timer-container">
   <mat-icon>alarm</mat-icon>
-  <app-timer [duration]="gameDuration"></app-timer>
+  <app-timer></app-timer>
 </div>
 
 
@@ -73,6 +74,3 @@
     <div class="progress-text">{{ calculateProgress() | number : '1.0-0' }}%</div>
   </div>
 </div>
-
-
-

@@ -4,7 +4,5 @@ export class GameResult {
     public gameId: string,
     public date: Date,
     public points: number,
-    public secondLeftInGame: number,
-    public secondsPlayed: number
   ) {}
 }

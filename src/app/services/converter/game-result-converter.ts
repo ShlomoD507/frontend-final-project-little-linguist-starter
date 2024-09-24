@@ -14,8 +14,6 @@ export const GameResultConverter: FirestoreDataConverter<GameResult> = {
       gameId: gameResult.gameId,
       date: Timestamp.fromDate(gameResult.date),
       points: gameResult.points,
-      secondLeftInGame: gameResult.secondLeftInGame,
-      secondsPlayed: gameResult.secondsPlayed,
     };
   },
 
@@ -30,8 +28,6 @@ export const GameResultConverter: FirestoreDataConverter<GameResult> = {
       realData['gameId'],
       realData['date'].toDate(), // נדרש להמיר את התאריך מפורמט של Firestore
       realData['points'],
-      realData['secondLeftInGame'],
-      realData['secondsPlayed']
     );
   },
 };
