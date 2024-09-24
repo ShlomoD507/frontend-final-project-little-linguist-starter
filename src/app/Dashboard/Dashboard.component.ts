@@ -17,13 +17,13 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class DashboardComponent implements OnInit {
   cards = [
-    { title: 'Games', value: 0 },
-    { title: 'Points', value: 0 },
+    { title: 'Total Games', value: 0 },
+    { title: 'Total Points', value: 0 },
     { title: 'Categories learnt', value: 0 },
     { title: 'Perfect games', value: '0%' },
     { title: 'Days strike', value: 0 },
     { title: 'Games this month', value: 0 },
-    { title: 'Highest score game', value: 'Unknown' }, // כרטיסיה לשם המשחק עם הניקוד הגבוה ביותר
+    { title: 'Highest score game', value: '-' }, // כרטיסיה לשם המשחק עם הניקוד הגבוה ביותר
   ];
 
   gameResults: GameResult[] = [];
@@ -44,7 +44,6 @@ export class DashboardComponent implements OnInit {
 
   async loadStats(): Promise<void> {
     const categories = await this.categoriesService.list();
-    console.log(this.calculateDaysStrike());
 
     this.cards[0].value = this.gameResults.length; // מספר משחקים
     this.cards[1].value = this.calculateTotalPoints(this.gameResults); // כמות נקודות
@@ -61,7 +60,7 @@ export class DashboardComponent implements OnInit {
 
   calculatePerfectGames(games: GameResult[]): number {
     const perfectGames = games.filter((game) => game.points === 100); // ניקוד מקסימלי
-    return games.length ? (perfectGames.length / games.length) * 100 : 0;
+    return games.length ? Math.round((perfectGames.length / games.length) * 100) : 0;
   }
 
   calculateDaysStrike(): number {
