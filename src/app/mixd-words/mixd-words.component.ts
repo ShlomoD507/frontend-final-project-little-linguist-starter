@@ -28,6 +28,7 @@ import { Router } from '@angular/router';
 import { GameResult } from '../../shared/model/game-result';
 import { GameResultService } from '../services/game-result.service';
 import { GameIdEnum } from '../services/GameInfo.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-mixd-words',
@@ -47,6 +48,7 @@ import { GameIdEnum } from '../services/GameInfo.service';
     NgIf,
     GamePointsComponent,
     MatTableModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './mixd-words.component.html',
   styleUrl: './mixd-words.component.css',
@@ -67,6 +69,9 @@ export class MixdWordsComponent implements OnInit {
   displayedColumns: string[] = ['hebrew', 'english', 'isCorrect'];
   isLoading: boolean = true;
 
+  userInput: string = '';
+  errorMessage: string = '';
+
   currentCategory: Category = new Category(
     '',
     'fake-category',
@@ -84,6 +89,29 @@ export class MixdWordsComponent implements OnInit {
   navigateToChooseGame() {
     this.router.navigate(['choose-your-game']);
   }
+
+    checkLanguage(): void {
+      if (this.userInput.length > 0) {
+        const firstChar = this.userInput[0];
+        const isHebrew = /[\u0590-\u05FF]/.test(firstChar); // טווח תווים בעברית
+  
+        if (isHebrew) {
+          this.errorMessage = 'אתה כותב בעברית! יש לכתוב באנגלית.';
+        } else {
+          this.errorMessage = '';
+          console.log('isHebrew');
+
+        }
+      }
+    }
+  
+
+
+
+
+
+
+
 
   async ngOnInit(): Promise<void> {
     this.isLoading = true;

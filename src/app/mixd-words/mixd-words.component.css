@@ -12,6 +12,11 @@
   position: relative;
 }
 
+mat-spinner {
+  top: 50%;
+  left: 20px;
+}
+
 h2 {
   font-size: 34px;
   text-align: center;
