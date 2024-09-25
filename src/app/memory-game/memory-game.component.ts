@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslatedWord } from '../../shared/model/translated-word'; // ייבוא המודל של מילים מתורגמות
 import { CategoriesService } from '../services/categories.service'; // שירות הקטגוריות
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common'; // ייבוא CommonModule עבור ngFor, ngIf
 import { GameResult } from '../../shared/model/game-result';
 import { GameIdEnum } from '../services/GameInfo.service';
 import { GameResultService } from '../services/game-result.service';
+import { ExitDialogComponent } from '../exit-dialog/exit-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ExitButtonComponent } from "../exit-button/exit-button.component";
 
 @Component({
   selector: 'app-memory-game',
@@ -15,8 +18,9 @@ import { GameResultService } from '../services/game-result.service';
   imports: [
     MatCardModule,
     MatButtonModule,
-    CommonModule, // ייבוא CommonModule כדי לתמוך בתבניות ngFor ו-ngIf
-  ],
+    CommonModule,
+    ExitButtonComponent
+],
   templateUrl: './memory-game.component.html',
   styleUrls: ['./memory-game.component.css'],
 })
@@ -34,11 +38,14 @@ export class MemoryGameComponent implements OnInit {
   points: number = 100;
   idCategory: string = '';
   isGameWon: boolean = false;
-
+  
   constructor(
     private categoriesService: CategoriesService,
     private gameResultService: GameResultService,
-    private route: ActivatedRoute
+    private router: Router,
+    private route: ActivatedRoute,
+    private dialogService: MatDialog
+
   ) {}
 
   ngOnInit(): void {
@@ -158,5 +165,9 @@ export class MemoryGameComponent implements OnInit {
 
     this.firstCardIndex = null;
     this.secondCardIndex = null;
+  }
+  exitGame(): void {
+    this.dialogService.open(ExitDialogComponent);
+  
   }
 }
