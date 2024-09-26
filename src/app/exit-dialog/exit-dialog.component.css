@@ -20,13 +20,15 @@
     margin: 50px auto;
   }
 
-  .button-row{
+button{
   color: #ffffff; 
-  padding: 10px 20px; 
-  font-size: 16px; 
+  background-color: rgb(230, 230, 147);
+  padding: 30px 20px; 
+  margin: 20px;
+  font-size: 20px; 
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s; 
   margin: 10px;
+  font-family: Haettenschweiler;
 }
 
 button:hover {

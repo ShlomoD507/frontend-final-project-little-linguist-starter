@@ -3,7 +3,6 @@
   <h2>Memory Game - {{ points }} Points</h2>
 
   <div class="cards-container">
-    <!-- כרטיסיות המשחק -->
     <mat-card 
       *ngFor="let card of cards; let i = index" 
       class="card" 
@@ -12,29 +11,28 @@
       tabindex="0" 
       [class.flipped]="card.flipped" 
       [class.matched]="card.matched" 
-      [attr.dir]="card.direction"> <!-- קביעת כיוון הטקסט -->
+      [attr.dir]="card.direction"> 
 
-      <!-- צד קדמי של הכרטיס, אם הכרטיס עוד לא נפתח -->
+ 
       <mat-card-header *ngIf="!card.flipped && !card.matched">
         <mat-card-title>
-          <span class="question-mark">?</span> <!-- סימן שאלה, כמו בחידה -->
+          <span class="question-mark">?</span> 
         </mat-card-title>
       </mat-card-header>
 
-      <!-- צד אחורי של הכרטיס, אם הכרטיס נפתח או נמצא התאמה -->
       <mat-card-content *ngIf="card.flipped || card.matched">
-        {{ card.word }} <!-- מילה/תרגום בהתאם לכרטיס -->
+        {{ card.word }} 
       </mat-card-content>
     </mat-card>
   </div>
 
-  <!-- הודעת ניצחון כשכל הכרטיסים נמצאו -->
+
   <mat-card *ngIf="isGameWon" class="congratulations-card">
     <mat-card-content>
       Congratulations! You've matched all the cards! 
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="loadWords()">Play Again</button>
+      <button mat-raised-button  (click)="loadWords()">Play Again</button>
     </mat-card-actions>
   </mat-card>
 </div>

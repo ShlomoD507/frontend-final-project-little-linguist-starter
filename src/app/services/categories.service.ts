@@ -22,7 +22,7 @@ export class CategoriesService {
 
   constructor(private firestore: Firestore) {}
 
-  // Angular = TS objects <=> firestore = { } JSON
+
   async list(): Promise<Category[]> {
     const connection = collection(
       this.firestore,

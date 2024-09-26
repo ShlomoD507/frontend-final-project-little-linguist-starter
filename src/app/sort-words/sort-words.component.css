@@ -1,46 +1,50 @@
 .container {
   padding: 20px;
   max-width: 1200px;
-  margin: 0 auto; 
+  margin: 0 auto;
 }
 
 .headTitle {
   display: flex;
   align-items: center;
-  justify-content: space-between; 
+  justify-content: space-between;
   margin-bottom: 20px;
   position: relative;
 }
 
 h2 {
-  font-size: 34px; 
+  font-size: 34px;
   text-align: center;
   font-weight: bold;
   color: rgb(60, 60, 135);
-  background: linear-gradient(to top left, rgb(159, 236, 236), rgb(230, 230, 147));
+  background: linear-gradient(
+    to top left,
+    rgb(159, 236, 236),
+    rgb(230, 230, 147)
+  );
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 20px;
   border: 2px solid #00ff44;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.9s;
-  width: 100%; 
+  width: 100%;
   margin: 0 auto;
 }
 
 .exitgame {
   position: absolute;
-  top: 50%;  
-  left: 20px;  
-  transform: translateY(-50%); 
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
 }
 
 .app-game-points {
   font-size: large;
   position: absolute;
-  top: 100%; 
+  top: 100%;
   right: 20px;
-  transform: translateY(-100%); 
+  transform: translateY(-100%);
 }
 
 p {
@@ -52,7 +56,7 @@ p {
   display: flex;
   justify-content: center;
   margin-top: 20px;
-  margin-bottom: 60px; 
+  margin-bottom: 60px;
 }
 
 .button-group button {
@@ -64,12 +68,6 @@ p {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
   transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.button-group button:hover {
-  background-color: #e0f7fa;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transform: scale(1.05);
 }
 
 .button-group button:active {
@@ -124,7 +122,8 @@ table.mat-table {
   margin-bottom: 20px;
 }
 
-th.mat-header-cell, td.mat-cell {
+th.mat-header-cell,
+td.mat-cell {
   text-align: center;
   font-size: 18px;
 }

@@ -39,7 +39,7 @@ import { GameResultService } from '../services/game-result.service';
     NgIf,
     GamePointsComponent,
     MatTableModule,
-],
+  ],
   templateUrl: './sort-words.component.html',
   styleUrl: './sort-words.component.css',
 })
@@ -57,13 +57,13 @@ export class SortWordsComponent implements OnInit {
   constructor(
     private categoriesService: CategoriesService,
     private dialogService: SortWordsDialogService,
-    private dialog: MatDialog, // הוספת MatDialog לשימוש ב-Exit Dialog
+    private dialog: MatDialog,
     private router: Router,
     private gameResultService: GameResultService
   ) {
     this.currentCategory = new Category(
       '',
-      'fake-category',
+      'Laoding...',
       Language.English,
       Language.Hebrew,
       []
@@ -82,17 +82,12 @@ export class SortWordsComponent implements OnInit {
         this.currentCategory = selectedCateogry;
         this.getRandomCategory().then((randomCategory) => {
           this.randomCategory = randomCategory;
-          // קבלת 3 מילים מכל קטגוריה
           const currentWords = this.getRandomWords(this.currentCategory, 3);
           const randomWords = this.getRandomWords(this.randomCategory, 3);
 
-          // שילוב וערבוב המילים שנבחרו משתי הקטגוריות
           this.wordPool = this.shuffleWords([...currentWords, ...randomWords]);
-
           this.wordPoints = Math.floor(100 / this.wordPool.length);
-
           this.isLoading = false;
-          
         });
       } else {
         console.error('קטגוריה נוכחית לא נמצאה.');
@@ -159,10 +154,10 @@ export class SortWordsComponent implements OnInit {
       this.endGame = true;
 
       const gameResult = new GameResult(
-        this.id, // id קטגוריה
-        GameIdEnum.SortWords.toString(), // מזהה של המשחק
-        new Date(), // תאריך המשחק
-        this.userPoints, // כמות נקודות
+        this.id,
+        GameIdEnum.SortWords.toString(),
+        new Date(),
+        this.userPoints
       );
 
       this.gameResultService
@@ -173,8 +168,7 @@ export class SortWordsComponent implements OnInit {
         .catch((error) => {
           console.error('Error saving game result:', error);
         });
-        
-      // if user got the maximum points
+
       if (this.userPoints === this.wordPoints * this.wordPool.length) {
         this.userPoints = 100;
       }
@@ -186,10 +180,10 @@ export class SortWordsComponent implements OnInit {
   }
 
   startNewGame(): void {
-    this.currentPoolIndex = 0; // אתחול המיקום הנוכחי בבריכת המילים
-    this.userPoints = 0; // אתחול הנקודות של המשתמש
-    this.endGame = false; // לוודא שהמשחק לא מסומן כסיים
-    this.ngOnInit(); // קריאה מחודשת ל-ngOnInit כדי לאתחל את הקטגוריות והמילים מחדש
+    this.currentPoolIndex = 0;
+    this.userPoints = 0;
+    this.endGame = false;
+    this.ngOnInit();
   }
 
   exitGame(): void {

@@ -48,7 +48,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     NgIf,
     GamePointsComponent,
     MatTableModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
   templateUrl: './mixd-words.component.html',
   styleUrl: './mixd-words.component.css',
@@ -74,7 +74,7 @@ export class MixdWordsComponent implements OnInit {
 
   currentCategory: Category = new Category(
     '',
-    'fake-category',
+    'Loading...',
     Language.English,
     Language.English,
     []
@@ -90,28 +90,12 @@ export class MixdWordsComponent implements OnInit {
     this.router.navigate(['choose-your-game']);
   }
 
-    checkLanguage(): void {
-      if (this.userInput.length > 0) {
-        const firstChar = this.userInput[0];
-        const isHebrew = /[\u0590-\u05FF]/.test(firstChar); // טווח תווים בעברית
-  
-        if (isHebrew) {
-          this.errorMessage = 'אתה כותב בעברית! יש לכתוב באנגלית.';
-        } else {
-          this.errorMessage = '';
-          console.log('isHebrew');
-
-        }
-      }
-    }
-  
-
-
-
-
-
-
-
+  checkLanguage(): void {
+    const firstChar = this.userInput?.[0];
+    const charCode = firstChar?.charCodeAt(0);
+    const isHebrew = charCode >= 1488 && charCode <= 1514;
+    this.errorMessage = isHebrew ? 'אתה כותב בעברית! יש לכתוב באנגלית.' : '';
+  }
 
   async ngOnInit(): Promise<void> {
     this.isLoading = true;
@@ -129,9 +113,7 @@ export class MixdWordsComponent implements OnInit {
         console.error('Category not found.');
       }
 
-      // this game is limited to 4 minutes
-      this.timerComponent.startTimer(240);
-
+      this.timerComponent.startTimer(180);
       this.isLoading = false;
     });
   }
@@ -174,7 +156,6 @@ export class MixdWordsComponent implements OnInit {
 
     this.index++;
     if (this.endGame) {
-      // if user got the maximum points
       if (this.gamePoints === this.successPoints * this.words.length) {
         this.gamePoints = 100;
       }
@@ -216,10 +197,10 @@ export class MixdWordsComponent implements OnInit {
 
   sendStatistics() {
     const gameResult = new GameResult(
-      this.id, // id קטגוריה
-      GameIdEnum.MixedWords.toString(), // מזהה של המשחק
-      new Date(), // תאריך המשחק
-      this.gamePoints // כמות נקודות
+      this.id, 
+      GameIdEnum.MixedWords.toString(), 
+      new Date(), 
+      this.gamePoints 
     );
 
     this.gameResultService

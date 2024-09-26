@@ -46,13 +46,13 @@
 }
 
 .memory-game .card.flipped, .memory-game .card.matched {
-  background-color: #4caf50; /* צבע ירוק לכרטיסים שנמצאה להם התאמה */
+  background-color: #4caf50; 
   color: white;
   transform: scale(1.05);
 }
 
 .memory-game .card.matched {
-  pointer-events: none; /* למנוע לחיצה נוספת על כרטיסים שנמצאה להם התאמה */
+  pointer-events: none; 
 }
 
 .memory-game .question-mark {
@@ -67,6 +67,7 @@
   padding: 20px;
   margin-top: 20px;
   border-radius: 10px;
+  align-items: center;
 }
 
 .memory-game .button-container {
@@ -83,12 +84,12 @@
   font-weight:lighter;
 }
 
-/* טיפול בטקסט בעברית */
+
 .memory-game .card[dir="rtl"] {
   direction: rtl;
 }
 
-/* כרטיס כשהעכבר מעליו */
+
 .memory-game .card:hover {
   background-color: #2196f3;
   transform: scale(1.1);
@@ -96,4 +97,13 @@
 
 .memory-game .card:focus {
   outline: 2px solid #2196f3;
+}
+
+button {
+  margin: 10px;
+  flex-direction: row;
+  width: 150px;
+  margin-top: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

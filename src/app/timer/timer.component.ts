@@ -23,7 +23,6 @@ export class TimerComponent {
   startTimer(secondsLeft: number) {
     this.timeForGame = secondsLeft;
     this.secondsLeft = secondsLeft;
-    //  every seconds, increase the timer
     this.timerInterval = setInterval(() => {
       this.secondsLeft--;
       if (this.secondsLeft <= 0) {
@@ -44,7 +43,6 @@ export class TimerComponent {
   }
 
   get convertToMMSS(): string {
-    // convert seconds to MM:SS
     const minutes = Math.floor(this.secondsLeft / 60);
     const remainedSeconds = this.secondsLeft % 60;
     return (

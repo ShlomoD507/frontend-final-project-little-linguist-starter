@@ -63,13 +63,10 @@
       </div>
     </div>
   </div>
-
   <div class="timer-container">
     <mat-icon>alarm</mat-icon>
     <app-timer (timerDone)="onTimerDone()"></app-timer>
   </div>
-
-
   <div class="progress-container" *ngIf="!isLoading">
     <div class="progress-bar">
       <span class="current-word-count">{{ index }}</span>
