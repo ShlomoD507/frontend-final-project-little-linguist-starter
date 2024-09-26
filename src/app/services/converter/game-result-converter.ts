@@ -26,7 +26,7 @@ export const GameResultConverter: FirestoreDataConverter<GameResult> = {
     return new GameResult(
       realData['idCategory'],
       realData['gameId'],
-      realData['date'].toDate(), // נדרש להמיר את התאריך מפורמט של Firestore
+      realData['date'].toDate(), 
       realData['points'],
     );
   },

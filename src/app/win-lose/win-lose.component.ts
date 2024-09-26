@@ -22,6 +22,4 @@ export class WinLoseComponent {
   getResultMessage(): string {
     return this.data.isSuccess ? 'Correct!' : 'Wrong!';
   }
-
 }
-

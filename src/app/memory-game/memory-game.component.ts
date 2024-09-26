@@ -10,22 +10,17 @@ import { GameIdEnum } from '../services/GameInfo.service';
 import { GameResultService } from '../services/game-result.service';
 import { ExitDialogComponent } from '../exit-dialog/exit-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ExitButtonComponent } from "../exit-button/exit-button.component";
+import { ExitButtonComponent } from '../exit-button/exit-button.component';
 
 @Component({
   selector: 'app-memory-game',
   standalone: true,
-  imports: [
-    MatCardModule,
-    MatButtonModule,
-    CommonModule,
-    ExitButtonComponent
-],
+  imports: [MatCardModule, MatButtonModule, CommonModule, ExitButtonComponent],
   templateUrl: './memory-game.component.html',
   styleUrls: ['./memory-game.component.css'],
 })
 export class MemoryGameComponent implements OnInit {
-  words: TranslatedWord[] = []; // מילים והפירוש שלהן
+  words: TranslatedWord[] = [];
   cards: {
     word: string;
     flipped: boolean;
@@ -38,14 +33,13 @@ export class MemoryGameComponent implements OnInit {
   points: number = 100;
   idCategory: string = '';
   isGameWon: boolean = false;
-  
+
   constructor(
     private categoriesService: CategoriesService,
     private gameResultService: GameResultService,
     private router: Router,
     private route: ActivatedRoute,
     private dialogService: MatDialog
-
   ) {}
 
   ngOnInit(): void {
@@ -53,23 +47,21 @@ export class MemoryGameComponent implements OnInit {
     this.loadWords();
   }
 
-  // טוען את המילים והפירושים מהקטגוריה הנבחרת ומכין את הכרטיסים
   async loadWords(): Promise<void> {
     this.isGameWon = false;
     this.firstCardIndex = null;
     this.secondCardIndex = null;
     this.attempts = 0;
     this.points = 100;
-    const category = await this.categoriesService.get(this.idCategory); // המתן לקבלת הקטגוריה
+    const category = await this.categoriesService.get(this.idCategory);
     if (category) {
       this.words = category.words;
-      this.cards = this.shuffleCards([...this.words]); // יצירת הכפלה למילים ולפירושים
+      this.cards = this.shuffleCards([...this.words]);
     } else {
       console.error('Category not found');
     }
   }
 
-  // ערבוב הכרטיסים והוספת המאפיין direction
   shuffleCards(
     pair: TranslatedWord[]
   ): { word: string; flipped: boolean; matched: boolean; direction: string }[] {
@@ -81,28 +73,26 @@ export class MemoryGameComponent implements OnInit {
         word: singlePair.origin,
         flipped: false,
         matched: false,
-        direction: this.getTextDirection(singlePair.origin), // קביעת כיוון הטקסט בהתאם לשפה
+        direction: this.getTextDirection(singlePair.origin),
       });
       shuffled.push({
         word: singlePair.target,
         flipped: false,
         matched: false,
-        direction: this.getTextDirection(singlePair.target), // קביעת כיוון הטקסט בהתאם לשפה
+        direction: this.getTextDirection(singlePair.target),
       });
     }
 
-    const shuffledCards = shuffled.sort(() => Math.random() - 0.5); // ערבוב הכרטיסים
+    const shuffledCards = shuffled.sort(() => Math.random() - 0.5);
     console.log(shuffledCards);
     return shuffledCards;
   }
 
-  // פונקציה להחזרת כיוון טקסט בהתאם לתוכן
   getTextDirection(text: string): string {
     const hebrewCharRange = /[\u0590-\u05FF]/;
     return hebrewCharRange.test(text) ? 'rtl' : 'ltr';
   }
 
-  // נגיעה בכרטיס
   flipCard(index: number): void {
     if (this.firstCardIndex === null) {
       this.firstCardIndex = index;
@@ -114,11 +104,10 @@ export class MemoryGameComponent implements OnInit {
 
       setTimeout(() => {
         this.checkMatch();
-      }, 1000); // השהיה של שנייה בין שתי לחיצות
+      }, 1000);
     }
   }
 
-  // בדיקה אם יש התאמה בין כרטיסים
   checkMatch(): void {
     const firstCard = this.cards[this.firstCardIndex!];
     const secondCard = this.cards[this.secondCardIndex!];
@@ -131,22 +120,20 @@ export class MemoryGameComponent implements OnInit {
         (w) => w.target === firstCard.word && w.origin === secondCard.word
       )
     ) {
-      // התאמה
       firstCard.matched = true;
       secondCard.matched = true;
       firstCard.flipped = true;
-      secondCard.flipped = true; // השאר הכרטיסים הפוכים כשיש התאמה
+      secondCard.flipped = true;
 
-      // בדיקה אם כל הכרטיסים תואמים
-      this.isGameWon =  this.cards.every(card => card.matched);
-      if (this.isGameWon){
+      this.isGameWon = this.cards.every((card) => card.matched);
+      if (this.isGameWon) {
         const gameResult = new GameResult(
-          this.idCategory, // id קטגוריה
-          GameIdEnum.MemoryGame.toString(), // מזהה של המשחק
-          new Date(), // תאריך המשחק
-          this.points, // כמות נקודות
+          this.idCategory,
+          GameIdEnum.MemoryGame.toString(),
+          new Date(),
+          this.points
         );
-  
+
         this.gameResultService
           .addGameResult(gameResult)
           .then(() => {
@@ -157,10 +144,9 @@ export class MemoryGameComponent implements OnInit {
           });
       }
     } else {
-      // אין התאמה
       firstCard.flipped = false;
       secondCard.flipped = false;
-      this.points -= 2; // הפחתת 2 נקודות על כל ניסיון כושל
+      this.points -= 2;
     }
 
     this.firstCardIndex = null;
@@ -168,6 +154,5 @@ export class MemoryGameComponent implements OnInit {
   }
   exitGame(): void {
     this.dialogService.open(ExitDialogComponent);
-  
   }
 }

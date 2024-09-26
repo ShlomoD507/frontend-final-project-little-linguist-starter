@@ -2,7 +2,7 @@
 
   <div class="loading" *ngIf="isLoading">
     <mat-spinner></mat-spinner>
-<h1>Loading...</h1>
+    <h1>Loading...</h1>
   </div>
 
   <div class="container" *ngIf="!isLoading">
@@ -21,7 +21,8 @@
       <form class="mainForm" #mixWordForm="ngForm" (ngSubmit)="submit()">
         <mat-form-field class="GuessInput" color="primary">
           <mat-label>Guess the Word:</mat-label>
-          <input matInput [(ngModel)]="words[index].guess" name="guess" #guessField="ngModel" required (input)="checkLanguage()" placeholder="הקלד כאן באנגלית" />
+          <input matInput [(ngModel)]="words[index].guess" name="guess" #guessField="ngModel" required
+            (input)="checkLanguage()" placeholder="הקלד כאן באנגלית" />
         </mat-form-field>
         <p *ngIf="errorMessage">{{ errorMessage }}</p>
 

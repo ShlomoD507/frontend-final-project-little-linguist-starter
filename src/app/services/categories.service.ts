@@ -1,6 +1,5 @@
 import { Category } from './../../shared/model/category';
 import { Injectable } from '@angular/core';
-
 import {
   addDoc,
   collection,
@@ -19,9 +18,7 @@ import { CategoryConverter } from './converter/category-converter';
 })
 export class CategoriesService {
   private readonly CATEGORY_KEY = 'categories';
-
   constructor(private firestore: Firestore) {}
-
 
   async list(): Promise<Category[]> {
     const connection = collection(
@@ -35,7 +32,6 @@ export class CategoriesService {
       const category = doc.data();
       result.push(category);
     });
-
     return result;
   }
 

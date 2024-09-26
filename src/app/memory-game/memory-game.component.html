@@ -13,7 +13,6 @@
       [class.matched]="card.matched" 
       [attr.dir]="card.direction"> 
 
- 
       <mat-card-header *ngIf="!card.flipped && !card.matched">
         <mat-card-title>
           <span class="question-mark">?</span> 
@@ -25,7 +24,6 @@
       </mat-card-content>
     </mat-card>
   </div>
-
 
   <mat-card *ngIf="isGameWon" class="congratulations-card">
     <mat-card-content>

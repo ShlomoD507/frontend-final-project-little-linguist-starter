@@ -68,10 +68,8 @@ export class MixdWordsComponent implements OnInit {
   displayTimeLeft: string = '';
   displayedColumns: string[] = ['hebrew', 'english', 'isCorrect'];
   isLoading: boolean = true;
-
   userInput: string = '';
   errorMessage: string = '';
-
   currentCategory: Category = new Category(
     '',
     'Loading...',
@@ -197,10 +195,10 @@ export class MixdWordsComponent implements OnInit {
 
   sendStatistics() {
     const gameResult = new GameResult(
-      this.id, 
-      GameIdEnum.MixedWords.toString(), 
-      new Date(), 
-      this.gamePoints 
+      this.id,
+      GameIdEnum.MixedWords.toString(),
+      new Date(),
+      this.gamePoints
     );
 
     this.gameResultService

@@ -35,7 +35,7 @@ export class GameInfoService {
       GameIdEnum.MemoryGame,
       'Memory Game',
       'Match the words with their translations to win',
-      'memory-game' // השם של הנתיב של המשחק
+      'memory-game'
     ),
   ];
 
